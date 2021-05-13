@@ -8,13 +8,18 @@ package projetPointeuseSSM;
  * 
  */
 
+import java.time.*;
 
 public class CEmployee {
 
-	private int iEMPIdEmployee;
-	private String sEMPLastNameEmployee;
-	private String sEMPFirstNameEmployee;
-	private int iEMPNumeroDepartement;
-	private CPlanning plaEMPPlanningEmployee;
+	private int IdEmployee;
+	private String LastNameEmployee;
+	private String FirstNameEmployee;
+	private int NumeroDepartement;
+	private CPlanning PlanningEmployee;
+	private LocalTime HoursTheory;
+	private LocalTime HoursDo;
+	
+	
 	
 }

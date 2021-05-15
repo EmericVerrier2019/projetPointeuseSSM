@@ -2,7 +2,7 @@ package projetPointeuseSSM;
 import java.util.ArrayList;
 
 
-public class CDepartement {
+public class CDepartment {
 
 	
 	//variables

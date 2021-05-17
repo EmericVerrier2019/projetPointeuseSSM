@@ -8,8 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 import javax.swing.SwingUtilities;
-import view.*
-;
+import view.*;
 public class Main {
 
 	public static void main(String[] args)

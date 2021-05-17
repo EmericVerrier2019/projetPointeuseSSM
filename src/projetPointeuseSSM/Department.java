@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Department {
 
 	
-	//variables
+	//variables//
 	
 	private String sDEPDepartmentName;
 	private int iDEPDepartmentNumber;

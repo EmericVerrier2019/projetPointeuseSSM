@@ -63,10 +63,28 @@ public class Day {
 		return  this.lDAYtimeEnd;
 	}
 	/**
-	 * @return getter method to get the moment when the employee begins his work.
+	 * getter method to get the moment when the employee begins his work.
+	 * @return lDayTimeStart 
 	 */
 	public LocalTime getlDAYTimeStart() 
 	{
 		return this.lDAYtimeStart;
+	}
+	/**
+	 * getter method to get the name of the day
+	 * @return sDAYdayName
+	 * 
+	 */
+	public String getsDAYdayName() 
+	{
+		return this.sDAYdayName;
+	}
+	/**
+	 * override of the toString method to get a string representing a day object
+	 * @return String
+	 */
+	public String toString() 
+	{
+		return(lDAYtimeStart.toString() + " "+ lDAYtimeEnd.toString() + " " + sDAYdayName.toString());
 	}
 }

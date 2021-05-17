@@ -7,11 +7,20 @@ import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
+import javax.swing.SwingUtilities;
+import view.*
+;
 public class Main {
 
 	public static void main(String[] args)
 	{
-		System.out.println("test 2");
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				//On crée une nouvelle instance de notre JDialog
+				MainFrame fenetre = new MainFrame();
+				fenetre.setVisible(true);//On la rend visible
+			}
+		});
 
 	}
 	

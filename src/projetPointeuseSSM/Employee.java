@@ -209,4 +209,18 @@ public class Employee {
 	public boolean getIsWorking() {
 		return this.isWorking;
 	}
+	
+	/*******************/
+	/***** Methods *****/
+	/*******************/
+	
+	
+	public void addHourDo(LocalTime hour) {
+		int numberHours = hour.getHour();
+		int numberMinutes = hour.getMinute();
+		int numberSecondes = hour.getSecond();
+		setHoursDo(this.hoursDo.plusHours(numberHours).plusMinutes(numberMinutes).plusSeconds(numberSecondes));
+	}
+	
+	
 }

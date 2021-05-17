@@ -209,4 +209,27 @@ public class Employee {
 	public boolean getIsWorking() {
 		return this.isWorking;
 	}
+	
+	/*******************/
+	/***** Methods *****/
+	/*******************/
+	
+	
+	public void addHourDo(LocalTime hour) {
+		int numberHours = hour.getHour();
+		int numberMinutes = hour.getMinute();
+		int numberSecondes = hour.getSecond();
+		setHoursDo(this.hoursDo.plusHours(numberHours).plusMinutes(numberMinutes).plusSeconds(numberSecondes));
+	}
+	
+	public String toString() {
+		return "Employé avec l'identifiant: "+getIdEmployee()+System.lineSeparator()+
+				"Nom: "+getLastName()+" Prenom: "+getFirstName()+System.lineSeparator()+
+				"Identifiant de son departement: "+getIdDepartment()+System.lineSeparator()+
+				"Heures que l'employé doit faire: "+getHoursTheory()+System.lineSeparator()+
+				"Heures que l'employé a réalisé: "+getHoursDo()+System.lineSeparator()+
+				"L'employé est présent sur le lieu de travail: "+getIsWorking();
+	}
+	
+	
 }

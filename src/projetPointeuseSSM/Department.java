@@ -1,3 +1,21 @@
+/**
+ * The class used to model a Depratment
+ * 
+ * This class is composed of 4 attributes :
+ * -a Department name which is composed of type String
+ * -a Department Number name which is composed of type int
+ * -a EmployeeNumber which is composed of type int. That correspond to the number of employee for one department
+ * -a List of Employee, that contain all the Employee of one department, which is composed of type Employee
+ * 
+ * The class has all methods setters and getters, which allow to update and get the different attributes of this one
+ * 
+ * @author Matthis
+ * @version 1.0
+ * 
+ */
+
+
+
 package projetPointeuseSSM;
 import java.util.ArrayList;
 
@@ -7,10 +25,10 @@ public class Department {
 	
 	//variables//
 	
-	private String sDEPDepartmentName;
-	private int iDEPDepartmentNumber;
-	private int iDEPEmployeeNumber; // number of employee in each department
-	private ArrayList<Employee> asDEPEmployee;
+	private String DepartmentName;
+	private int DepartmentNumber;
+	private int EmployeeNumber; // number of employee in each department
+	private ArrayList<Employee> EmployeeList;
 	
 	
 	/***********************/
@@ -18,17 +36,17 @@ public class Department {
 	/***********************/
 	
 	public Department() {
-		this.sDEPDepartmentName = null;
-		this.iDEPDepartmentNumber = 0;
-		this.iDEPEmployeeNumber = 0;
-		this.asDEPEmployee = new ArrayList<Employee>();
+		this.DepartmentName = null;
+		this.DepartmentNumber = 0;
+		this.EmployeeNumber = 0;
+		this.EmployeeList = new ArrayList<Employee>();
 		}
 	
 	public Department(String DepartmentName, int DepartmentNumber, int EmployeeNumber, ArrayList<Employee> EmployeeList) {
-		this.sDEPDepartmentName = DepartmentName;
-		this.iDEPDepartmentNumber = DepartmentNumber;
-		this.iDEPEmployeeNumber = EmployeeNumber;
-		this.asDEPEmployee = new ArrayList<Employee>(EmployeeList);
+		this.DepartmentName = DepartmentName;
+		this.DepartmentNumber = DepartmentNumber;
+		this.EmployeeNumber = EmployeeNumber;
+		this.EmployeeList = new ArrayList<Employee>(EmployeeList);
 
 	}
 	
@@ -41,7 +59,7 @@ public class Department {
 	 * @param sDEPDepartementName 
 	 */
 	public void setDepartmentName(String Name) {
-		this.sDEPDepartmentName = Name;
+		this.DepartmentName = Name;
 	}
 	
 	/**
@@ -49,23 +67,23 @@ public class Department {
 	 * @param sDEPDepartementName 
 	 */
 	public void setDepartmentNumber(int Number) {
-		this.iDEPDepartmentNumber = Number;
+		this.DepartmentNumber = Number;
 	}
 	
 	/**
 	 * set the number of employee in a department
-	 * @param iDEPEmployeeNumber 
+	 * @param EmployeeNumber 
 	 */
 	public void setEmployeeNumber(int Number) {
-		this.iDEPEmployeeNumber = Number;
+		this.EmployeeNumber = Number;
 	}
 	
 	/**
 	 * set the list of employee in a department
-	 * @param asDEPEmployee 
+	 * @param Employee 
 	 */
-	public void setAsDEPEmployee(ArrayList<Employee> asDEPEmployee) {
-		this.asDEPEmployee = asDEPEmployee;
+	public void setEmployee(ArrayList<Employee> Employee) {
+		this.EmployeeList = Employee;
 	}
 	
 	
@@ -79,7 +97,7 @@ public class Department {
 	 * @return sDEPDepartementName
 	 */
 	public String getDepartmentName() {
-		return this.sDEPDepartmentName;
+		return this.DepartmentName;
 	}
 	
 	
@@ -88,23 +106,23 @@ public class Department {
 	 * @return sDEPDepartementNumber
 	 */
 	public int getDepartmentNumber() {
-		return this.iDEPDepartmentNumber;
+		return this.DepartmentNumber;
 	}
 	
 	/**
 	 * get the number of employee in a department
-	 * @return iDEPEmployeeNumber
+	 * @return EmployeeNumber
 	 */
 	public int getEmployeeNumber() {
-		return this.iDEPEmployeeNumber;
+		return this.EmployeeNumber;
 	}
 	
 	/**
 	 * get the list of employee in a department
-	 * @return asDEPEmployee
+	 * @return Employee
 	 */
-	public ArrayList<Employee> getAsDEPEmployee() {
-		return this.asDEPEmployee;
+	public ArrayList<Employee> getEmployee() {
+		return this.EmployeeList;
 	}
 
 	
@@ -119,12 +137,12 @@ public class Department {
 	 * @return true if the employee was add, false if the employee was already in the list
 	 */
 	public boolean addNewEmployee(Employee EmployeeToAdd) {
-		if(this.asDEPEmployee.contains(EmployeeToAdd)) {
+		if(this.EmployeeList.contains(EmployeeToAdd)) {
 			return false;
 		}
 		else {
-			this.asDEPEmployee.add(EmployeeToAdd);
-			this.iDEPEmployeeNumber += 1;
+			this.EmployeeList.add(EmployeeToAdd);
+			this.EmployeeNumber += 1;
 			return true;
 		}
 	}

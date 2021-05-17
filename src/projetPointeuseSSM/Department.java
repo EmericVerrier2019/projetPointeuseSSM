@@ -2,7 +2,7 @@ package projetPointeuseSSM;
 import java.util.ArrayList;
 
 
-public class CDepartment {
+public class Department {
 
 	
 	//variables
@@ -10,7 +10,7 @@ public class CDepartment {
 	private String sDEPDepartementName;
 	private int iDEPDepartementNumber;
 	private int iDEPEmployeeNumber;
-	private ArrayList<CEmployee> asDEPEmployee;
+	private ArrayList<Employee> asDEPEmployee;
 	
 	//setters - getters
 	

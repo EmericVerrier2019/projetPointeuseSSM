@@ -22,15 +22,21 @@ package projetPointeuseSSM;
 
 import java.time.*;
 
-public class CEmployee {
+public class Employee {
 
 	private int idEmployee;
 	private String lastNameEmployee;
 	private String firstNameEmployee;
 	private int idDepartment;
-	private CPlanning planningEmployee;
+	private Planning planningEmployee;
 	private LocalTime hoursTheory;
 	private LocalTime hoursDo;
+	
+	/***********************/
+	/***** Constructor *****/
+	/***********************/
+	
+	
 	
 	/******************/
 	/***** Setter *****/
@@ -71,10 +77,10 @@ public class CEmployee {
 	
 	/**
 	 * Update the attribute planningEmployee
-	 * @param CPlanning newPlanning, the new employee's planning we want to set
-	 * @see CPlanning
+	 * @param Planning newPlanning, the new employee's planning we want to set
+	 * @see Planning
 	 */
-	public void setPlanning(CPlanning newPlanning) {
+	public void setPlanning(Planning newPlanning) {
 		this.planningEmployee = newPlanning;
 	}
 	
@@ -135,7 +141,7 @@ public class CEmployee {
 	 * Return the attribute planningEmployee
 	 * @return CPlanning planningEmployee
 	 */
-	public CPlanning getPlanning() {
+	public Planning getPlanning() {
 		return this.planningEmployee;
 	}
 	

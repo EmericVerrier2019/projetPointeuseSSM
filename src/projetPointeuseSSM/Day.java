@@ -2,20 +2,20 @@ package projetPointeuseSSM;
 
 import java.time.LocalTime;
 
-public class CDay {
+public class Day {
 
 	private String dayName;
 	private LocalTime timeStart;
 	private LocalTime timeEnd;
 	
-	public CDay() 
+	public Day() 
 	{
 		timeStart = LocalTime.now();
 		timeEnd = LocalTime.now();
 		dayName = new String("");
 		
 	}
-	public CDay(LocalTime timeStart, LocalTime timeEnd, String dayName) 
+	public Day(LocalTime timeStart, LocalTime timeEnd, String dayName) 
 	{
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;

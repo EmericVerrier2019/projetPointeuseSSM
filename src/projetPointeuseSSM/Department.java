@@ -147,6 +147,21 @@ public class Department {
 		}
 	}
 	
+	/**
+	 * Delete an employee in the list 
+	 * @param id of the employee
+	 * @return true if the employee was delete, false if the employee wasn't in the list
+	 */
+	
+	public boolean deleteEmployee (Employee EmployeeToDelete) {
+		if(this.EmployeeList.remove(EmployeeToDelete)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	
 	
 	

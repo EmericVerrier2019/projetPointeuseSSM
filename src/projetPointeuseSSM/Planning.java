@@ -19,6 +19,13 @@ public class Planning {
 	public Planning() 
 	{
 		dayList = new ArrayList<Day>();
+	}
+	/**
+	 * a stub method which affect some days with hours to the current planning object
+	 */
+	public void PlanningStub() 
+	{
+		dayList = new ArrayList<Day>();
 		Day monday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"monday");
 		Day tuesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"tuesday");
 		Day wednesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"wednesday");
@@ -38,5 +45,34 @@ public class Planning {
 	public ArrayList<Day> getDayList() 
 	{
 		return this.dayList;
+	}
+	/**
+	 * an accessor to add a new day by extending the DayList attribute
+	 * @param dayToAdd
+	 */
+	public void addDay(Day dayToAdd) 
+	{
+		this.dayList.add(dayToAdd);
+	}
+	/**
+	 * a method to set new day with a specified index, the new day replacing the old existing one
+	 * @param indexDay
+	 * @param dayNew
+	 */
+	public void setDay(int indexDay, Day dayNew) 
+	{
+		this.dayList.set(indexDay, dayNew);
+	}
+	/**
+	 * override of the toString Method to get a string representing a Planning object
+	 * @return String
+	 */
+	public String toString()
+	{
+		String resultString = new String("");
+		for (Day day : dayList) {
+			resultString = resultString + System.lineSeparator() + day.toString();
+		}
+		return resultString;
 	}
 }

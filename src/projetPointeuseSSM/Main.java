@@ -15,9 +15,12 @@ public class Main {
 	{
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				//On crée une nouvelle instance de notre JDialog
+				//On crï¿½e une nouvelle instance de notre JDialog
 				MainFrame fenetre = new MainFrame();
 				fenetre.setVisible(true);//On la rend visible
+				Planning p1 = new Planning();
+				p1.PlanningStub();
+				System.out.println(p1.toString());
 			}
 		});
 
@@ -41,7 +44,7 @@ public class Main {
 		
 		
 		/*
-		lien pour gerer la classe spécifique à une date : 
+		lien pour gerer la classe spï¿½cifique ï¿½ une date : 
 		-https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html#format-java.time.format.DateTimeFormatter-
 		*/
 		
@@ -53,21 +56,21 @@ public class Main {
 		System.out.println("Nous somme le " + dateCourante.getDayOfWeek().getDisplayName(TextStyle.FULL,Locale.FRANCE));
 		System.out.println("Nous serons le "+date2.getDayOfWeek().getDisplayName(TextStyle.FULL,Locale.FRANCE)+ System.lineSeparator());
 		
-		//date de naissance si dessous forme année,mois,jours
+		//date de naissance si dessous forme annï¿½e,mois,jours
 		LocalDate date3 = LocalDate.of(2000, 2, 3);
-		System.out.println("Nombre de mois séparant ma naissance "+ChronoUnit.MONTHS.between(date3,dateCourante)+ System.lineSeparator());
+		System.out.println("Nombre de mois sï¿½parant ma naissance "+ChronoUnit.MONTHS.between(date3,dateCourante)+ System.lineSeparator());
 		
 		/* 
-		lien pour la classe spécifique au format :
+		lien pour la classe spï¿½cifique au format :
 		-https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
 		*/
 		
 		LocalDate date4 = date3.withMonth(1);
 		System.out.println("Nous sommes le " +  dateCourante.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy",Locale.FRANCE)) + "." 
 							+ System.lineSeparator()
-							+ "Je suis né le " + date3.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy",Locale.FRANCE)) + "." + 
+							+ "Je suis nï¿½ le " + date3.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy",Locale.FRANCE)) + "." + 
 							System.lineSeparator()
-							+ "Je suis quasiment né le " + date4.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy",Locale.FRANCE)) + "." 
+							+ "Je suis quasiment nï¿½ le " + date4.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy",Locale.FRANCE)) + "." 
 							+ System.lineSeparator() + System.lineSeparator());
 		
 		
@@ -77,7 +80,7 @@ public class Main {
 		/****************************************/
 		
 		/*
-		lien pour gerer la classe spécifique à une heure : 
+		lien pour gerer la classe spï¿½cifique ï¿½ une heure : 
 		-https://docs.oracle.com/javase/8/docs/api/java/time/LocalTime.html
 		*/
 		
@@ -85,7 +88,7 @@ public class Main {
 		LocalTime time2 = time1.minusMinutes(19749);
 		
 		System.out.println("L'heure actuel est "+time1 + System.lineSeparator()
-							+"Il y a 19749 minutes l'heure était "+time2 
+							+"Il y a 19749 minutes l'heure ï¿½tait "+time2 
 							+ System.lineSeparator()+ System.lineSeparator());
 		
 		/************************************************/
@@ -93,7 +96,7 @@ public class Main {
 		/************************************************/
 		
 		/*
-		lien pour gerer la classe spécifique à date et heure : 
+		lien pour gerer la classe spï¿½cifique ï¿½ date et heure : 
 		-https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html
 		*/
 		
@@ -101,9 +104,9 @@ public class Main {
 		LocalDateTime ldt2 = LocalDateTime.of(date3, LocalTime.of(5,40));
 
 		System.out.println("La date et l'heure actuel est "+ldt1+ System.lineSeparator()
-							+"je suis née le "+ldt2);
+							+"je suis nï¿½e le "+ldt2);
 		
-		System.out.println("la durée de ma vie en heures est de : "+ldt2.until(ldt1,ChronoUnit.HOURS)+" heures.");
+		System.out.println("la durï¿½e de ma vie en heures est de : "+ldt2.until(ldt1,ChronoUnit.HOURS)+" heures.");
 		
 		
 		//tutoriel pour montrer un peu l'utilisation : https://www.vogella.com/tutorials/JavaDateTimeAPI/article.html

@@ -9,7 +9,6 @@ public class TimeClock {
 	private ArrayList<Employee> asDEPEmployeeHome;
 	private int TCPort;
 	
-	
 	/*****************
 	 * Constructors
 	 ****************/
@@ -18,6 +17,7 @@ public class TimeClock {
 		asDEPEmployeeWork = new ArrayList<Employee>();
 		PTSNombreEmployeeHome = 0;
 		asDEPEmployeeHome = new ArrayList<Employee>();
+		TCPort = 80;
 	}
 	public TimeClock(int ArgPort) {
 		PTSNombreEmployeeWork = 0;

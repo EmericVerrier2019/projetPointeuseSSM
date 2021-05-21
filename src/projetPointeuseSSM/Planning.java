@@ -76,6 +76,10 @@ public class Planning {
 		}
 		return resultString;
 	}
+	/**
+	 * return the sum of every worked hours in a week by an iterative usage of getDailyWorkedHours. The return is a duration object 
+	 * @return weeklyWorkedHours
+	 */
 	public Duration getWeeklyWorkedHours() 
 	{
 		Duration weeklyWorkedHours = Duration.ofMinutes(0);

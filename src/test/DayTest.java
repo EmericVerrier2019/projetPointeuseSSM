@@ -1,7 +1,9 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.time.Duration;
 import java.time.LocalTime;
 
 import org.junit.After;
@@ -13,9 +15,11 @@ import org.junit.Test;
 import projetPointeuseSSM.Day;
 
 public class DayTest {
+	private static Day testDay;
 	@BeforeClass
 	public static void ShowBeforeRunTestClass()
 	{
+		 testDay = new Day(LocalTime.of(8, 0),LocalTime.of(15, 0),"monday");
 		System.out.println("Start tests in DayTest");
 	}
 	
@@ -35,8 +39,13 @@ public class DayTest {
 	@Test
 	public void testGetsDAYdayName() 
 	{
-		Day testDay = new Day(LocalTime.of(8, 0),LocalTime.of(15, 0),"monday");
-		assertEquals("monday", testDay.getsDAYdayName());
+		
+		assertEquals("monday", this.testDay.getsDAYdayName());
+	}
+	@Test
+	public void testGetsDailyWorkedHours() 
+	{
+		assertEquals(this.testDay.getDailyWorkedHours().compareTo(Duration.ofHours(7)),0);
 	}
 
 }

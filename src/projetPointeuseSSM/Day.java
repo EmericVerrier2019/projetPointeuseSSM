@@ -39,9 +39,17 @@ public class Day {
 	 */
 	public Day(LocalTime timeStart, LocalTime timeEnd, String dayName) 
 	{
-		this.lDAYtimeStart = timeStart;
-		this.lDAYtimeEnd = timeEnd;
-		this.sDAYdayName = dayName;
+		try 
+		{
+			
+			this.lDAYtimeStart = timeStart;
+			this.lDAYtimeEnd = timeEnd;
+			this.sDAYdayName = dayName;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 	/**
 	 * basic setter to set the moment when the employee starts to work
@@ -58,6 +66,10 @@ public class Day {
 	public void setlDAYTimeEnd(LocalTime timeEnd) 
 	{
 		this.lDAYtimeEnd = timeEnd;
+		if(lDAYtimeEnd.isBefore(lDAYtimeStart))
+		{
+			Exception e = new Exception("heure d'arrivée après heure de fin");
+		}
 	}
 	/**
 	 * getter method to get the moment when the employee ends his day of work

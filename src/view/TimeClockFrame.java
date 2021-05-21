@@ -27,7 +27,7 @@ public class TimeClockFrame extends JFrame{
 	}
 	private void displayDate() 
 	{
-		JTextArea textDate = new JTextArea(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG)).toString());
+		JTextArea textDate = new JTextArea(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd EEEE kk:mm:ss")).toString());
 		textDate.setEditable(false);
 		getContentPane().add(textDate);
 		

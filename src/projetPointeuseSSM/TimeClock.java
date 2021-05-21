@@ -1,4 +1,5 @@
 package projetPointeuseSSM;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TimeClock {
@@ -93,5 +94,9 @@ public class TimeClock {
 	 */
 	public void SetTimeClockPort(int ArgPort){
 		this.TCPort = ArgPort;
+	}
+	static public LocalTime RoundTime() 
+	{
+		return LocalTime.now().minusMinutes(LocalTime.now().getMinute()%15);
 	}
 }

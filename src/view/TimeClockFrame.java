@@ -7,6 +7,8 @@ import java.time.format.FormatStyle;
 
 import javax.swing.*;
 
+import projetPointeuseSSM.TimeClock;
+
 public class TimeClockFrame extends JFrame{
 	public TimeClockFrame() 
 	{
@@ -28,6 +30,7 @@ public class TimeClockFrame extends JFrame{
 	private void displayDate() 
 	{
 		JTextArea textDate = new JTextArea(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd EEEE kk:mm:ss")).toString());
+		textDate.append(System.lineSeparator()+"okay lets say : "+ TimeClock.RoundTime().format(DateTimeFormatter.ofPattern("kk:mm")).toString());
 		textDate.setEditable(false);
 		getContentPane().add(textDate);
 		

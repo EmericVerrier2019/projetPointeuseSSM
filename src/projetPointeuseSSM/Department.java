@@ -84,6 +84,7 @@ public class Department {
 	 */
 	public void setEmployee(ArrayList<Employee> Employee) {
 		this.EmployeeList = Employee;
+		this.EmployeeNumber = Employee.size();
 	}
 	
 	
@@ -155,6 +156,7 @@ public class Department {
 	
 	public boolean deleteEmployee (Employee EmployeeToDelete) {
 		if(this.EmployeeList.remove(EmployeeToDelete)) {
+			this.EmployeeNumber -=1 ;
 			return true;
 		}
 		else {

@@ -1,6 +1,11 @@
 package projetPointeuseSSM;
 
+import java.time.Duration;
 import java.time.LocalTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalUnit;
 
 public class Day {
 
@@ -86,5 +91,15 @@ public class Day {
 	public String toString() 
 	{
 		return(lDAYtimeStart.toString() + " "+ lDAYtimeEnd.toString() + " " + sDAYdayName.toString());
+	}
+	/**
+	 * method to get the number of hours which separate the end of the day from the beginning (end - start);
+	 * @return
+	 * */
+	public Duration getDailyWorkedHours() 
+	{
+		long dailyWorkedHours = lDAYtimeStart.until(lDAYtimeEnd,ChronoUnit.MINUTES);
+		Duration hoursWorked = Duration.of(dailyWorkedHours,ChronoUnit.MINUTES);
+		return hoursWorked;
 	}
 }

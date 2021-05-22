@@ -1,5 +1,6 @@
 package projetPointeuseSSM;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -74,5 +75,13 @@ public class Planning {
 			resultString = resultString + System.lineSeparator() + day.toString();
 		}
 		return resultString;
+	}
+	public Duration getWeeklyWorkedHours() 
+	{
+		Duration weeklyWorkedHours = Duration.ofMinutes(0);
+		for (Day day : dayList) {
+			weeklyWorkedHours = weeklyWorkedHours.plus(day.getDailyWorkedHours());
+		}
+		return weeklyWorkedHours;
 	}
 }

@@ -21,6 +21,9 @@ package projetPointeuseSSM;
 
 
 import java.time.*;
+import java.time.temporal.ChronoUnit;
+
+import org.w3c.dom.events.EventException;
 
 public class Employee {
 
@@ -29,8 +32,8 @@ public class Employee {
 	private String firstNameEmployee;
 	private int idDepartment;
 	private Planning planningEmployee;
-	private LocalTime hoursTheory;
-	private LocalTime hoursDo;
+	private Duration hoursToDo;
+	private Duration hoursWorked;
 	private boolean isWorking; //this boolean mean the employee is present at work
 	
 	/***********************/
@@ -41,8 +44,7 @@ public class Employee {
 	 * Default constructor, which create Employee
 	 */
 	public Employee(){
-		setHoursDo(LocalTime.of(0, 0, 0));
-		setHoursTheory(LocalTime.of(0, 0, 0));
+		setHoursWorked(Duration.of(0,ChronoUnit.HOURS));
 	}
 	
 	/**
@@ -55,8 +57,7 @@ public class Employee {
 		setLastNameEmployee(lastName);
 		setIdDepartment(idDepartment);
 		setIdEmployee(idEmployee);
-		setHoursDo(LocalTime.of(0, 0, 0));
-		setHoursTheory(LocalTime.of(0, 0, 0));
+		setHoursWorked(Duration.of(0,ChronoUnit.HOURS));
 	}
 	
 	/**
@@ -67,8 +68,8 @@ public class Employee {
 	public Employee(int idDepartment, int idEmployee) {
 		setIdDepartment(idDepartment);
 		setIdEmployee(idEmployee);
-		setHoursDo(LocalTime.of(0, 0, 0));
-		setHoursTheory(LocalTime.of(0, 0, 0));
+		setHoursWorked(Duration.of(0,ChronoUnit.HOURS));
+		
 	}
 	
 	/******************/
@@ -119,19 +120,19 @@ public class Employee {
 	
 	/**
 	 * Update the attribute hoursTheory
-	 * @param LocalTime newHour, the new employee's number of theoretical hours that we want to set
+	 * @param Duration newHour, the new employee's number of hours to do that we want to set
 	 */
-	public void setHoursTheory(LocalTime newHour) {
-		this.hoursTheory = newHour;
+	private void setHoursToDo(Duration newHours) {
+		this.hoursToDo = newHours;
 	}
 	
 	/**
 	 * Update the attribute hoursDo
-	 * @param LocalTime newHour, the new employee's number of hours completed that we want to set
+	 * @param Duration newHour, the new employee's number of hours completed that we want to set
 	 * 
 	 */
-	public void setHoursDo(LocalTime newHour) {
-		this.hoursDo = newHour;
+	private void setHoursWorked(Duration newHours) {
+		this.hoursWorked = newHours;
 	}
 	
 	/**
@@ -190,16 +191,16 @@ public class Employee {
 	 * Return the attribute hoursTheory
 	 * @return LocalTime hoursTheory;
 	 */
-	public LocalTime getHoursTheory() {
-		return this.hoursTheory;
+	public Duration getHoursToDo() {
+		return this.hoursToDo;
 	}
 	
 	/**
 	 * Return the attribute hoursDo
 	 * @return LocalTime hoursDo
 	 */
-	public LocalTime getHoursDo() {
-		return this.hoursDo;
+	public Duration getHoursWorked() {
+		return this.hoursWorked;
 	}
 	
 	/**
@@ -215,21 +216,29 @@ public class Employee {
 	/*******************/
 	
 	
-	public void addHourDo(LocalTime hour) {
-		int numberHours = hour.getHour();
-		int numberMinutes = hour.getMinute();
-		int numberSecondes = hour.getSecond();
-		setHoursDo(this.hoursDo.plusHours(numberHours).plusMinutes(numberMinutes).plusSeconds(numberSecondes));
+	public void addHourWorked(Duration hour) {
+		setHoursWorked(getHoursWorked().plus(hour));
 	}
 	
 	public String toString() {
 		return "Employé avec l'identifiant: "+getIdEmployee()+System.lineSeparator()+
 				"Nom: "+getLastName()+" Prenom: "+getFirstName()+System.lineSeparator()+
 				"Identifiant de son departement: "+getIdDepartment()+System.lineSeparator()+
-				"Heures que l'employé doit faire: "+getHoursTheory()+System.lineSeparator()+
-				"Heures que l'employé a réalisé: "+getHoursDo()+System.lineSeparator()+
+				"Heures que l'employé doit faire: "+getHoursToDo()+System.lineSeparator()+
+				"Heures que l'employé a réalisé: "+getHoursWorked()+System.lineSeparator()+
 				"L'employé est présent sur le lieu de travail: "+getIsWorking();
 	}
 	
-	
+	public void updateHoursToDo() {
+		if (getPlanning() == null ) {
+			String errorMessage = "The employe's planning is not set";
+			short codeError = 1;
+			throw new EventException(codeError,errorMessage);
+		}else {
+			Planning planning = getPlanning();
+			//For the developpment we use stub methods
+			planning.PlanningStub();
+			setHoursToDo(planning.getWeeklyWorkedHours());
+		}
+	}
 }

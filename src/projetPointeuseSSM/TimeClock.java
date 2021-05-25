@@ -1,4 +1,7 @@
 package projetPointeuseSSM;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -8,8 +11,9 @@ public class TimeClock {
 	private ArrayList<Employee> asDEPEmployeeWork;
 	private int PTSNombreEmployeeHome;
 	private ArrayList<Employee> asDEPEmployeeHome;
-	private int TCPort;
-	
+	private int tcpPort;
+	private InetAddress ipAddress;
+	private Socket clientSocket;
 	
 	/*****************
 	 * Constructors
@@ -19,13 +23,30 @@ public class TimeClock {
 		asDEPEmployeeWork = new ArrayList<Employee>();
 		PTSNombreEmployeeHome = 0;
 		asDEPEmployeeHome = new ArrayList<Employee>();
+		try {
+		ipAddress = Inet4Address.getLocalHost();
+		clientSocket = new Socket();
+		}
+		catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
+		}
+		
 	}
-	public TimeClock(int ArgPort) {
+	public TimeClock(int ArgPort, byte[] ipAddr) {
 		PTSNombreEmployeeWork = 0;
 		asDEPEmployeeWork = new ArrayList<Employee>();
 		PTSNombreEmployeeHome = 0;
 		asDEPEmployeeHome = new ArrayList<Employee>();
-		TCPort = ArgPort;
+		tcpPort = ArgPort;
+		try 
+		{
+			ipAddress = Inet4Address.getByAddress(ipAddr);
+			clientSocket = new Socket(Inet4Address.getByAddress(ipAddr), tcpPort);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	public TimeClock(int NombreEmployeeWork, int NombreEmployeeHome) {
 		PTSNombreEmployeeWork = NombreEmployeeWork;
@@ -72,7 +93,7 @@ public class TimeClock {
 	 * @return int
 	 */
 	public int GetTimeClockPort() {
-		return this.TCPort;
+		return this.tcpPort;
 	}
 	/*
 	 * @brief Set the list of workers 
@@ -93,7 +114,7 @@ public class TimeClock {
 	 * @param ArgPort : a new port 
 	 */
 	public void SetTimeClockPort(int ArgPort){
-		this.TCPort = ArgPort;
+		this.tcpPort = ArgPort;
 	}
 	static public LocalTime RoundTime() 
 	{

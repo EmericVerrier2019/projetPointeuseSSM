@@ -6,9 +6,12 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+
+import view.timeClockView.JPanelParametersView;
 
 public class TimeClock {
 	//variable
@@ -16,17 +19,42 @@ public class TimeClock {
 	private ArrayList<Employee> asDEPEmployeeWork;
 	private int PTSNombreEmployeeHome;
 	private ArrayList<Employee> asDEPEmployeeHome;
-	private int tcpPort;
-	private InetAddress ipAddress;
-	private Socket clientSocket;
+	private static int tcpPort;
+	private static InetAddress ipAddress;
+	private static Socket clientSocket;
 
 
-	public static class ActionListenerParametersButton implements ActionListener{
-
+	static public class ActionListenerParametersButton implements ActionListener{
+		public ActionListenerParametersButton()
+		{
+			super();
+			clientSocket = new Socket();
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			System.out.println("ça marche");
+			JButton saveParametersButton = (JButton)e.getSource();
+			JPanelParametersView parentOfButton = (JPanelParametersView) saveParametersButton.getParent();
+			try 
+			{
+				ipAddress = Inet4Address.getByName(parentOfButton.getIpFieldContent());
+				tcpPort = Integer.parseInt(parentOfButton.getPortFieldContent());
+				if(clientSocket.isBound() == false) 
+				{
+					TimeClock.clientSocket.bind(new InetSocketAddress(ipAddress, tcpPort));
+					System.out.println("la socket est liée à un couple adresse/port mais n'est pas encore connectée pour émettre");
+					if(clientSocket.isConnected()) 
+					{
+						System.out.println("oui je suis connecté");
+					}
+				}
+				else 
+				{
+					System.out.println("erreur, la socket est déjà attachée à un couple port/adresse");
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 
 		}
 	}
@@ -92,17 +120,19 @@ public class TimeClock {
 	{
 		return LocalTime.now().minusMinutes(LocalTime.now().getMinute()%15);
 	}
-	public void setClientSocket(int ArgPort, byte[] addressToSet) 
+	public static void setClientSocket(int ArgPort, byte[] addressToSet) 
 	{
 		try {
-			this.clientSocket = new Socket(InetAddress.getByAddress(addressToSet), ArgPort);
+			TimeClock.clientSocket = new Socket(InetAddress.getByAddress(addressToSet), ArgPort);
+			TimeClock.tcpPort = ArgPort;
+			TimeClock.ipAddress = InetAddress.getByAddress(addressToSet);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	public void setClientSocket(Socket socketParam) 
 	{
-		this.clientSocket = socketParam;
+		TimeClock.clientSocket = socketParam;
 		this.ipAddress = socketParam.getInetAddress();
 		this.tcpPort = socketParam.getPort();
 	}

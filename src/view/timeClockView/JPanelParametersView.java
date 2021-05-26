@@ -19,15 +19,16 @@ public final class JPanelParametersView extends JPanel
 	private JTextField portField;
 	private JButton parametersButton;
 	
+
 	public JPanelParametersView() 
 	{
-		JLabel ipLabel = new JLabel("IP Adress : ");
-		JLabel portLabel = new JLabel("Port : ");
-		JTextField ipField = new JTextField(16);
-		JTextField portField = new JTextField(5);
-		JButton parametersButton = new JButton("Save Parameters");
-		parametersButton.addActionListener(new ActionListenerParametersButton());
+		ipLabel = new JLabel("IP Adress : ");
+		portLabel = new JLabel("Port : ");
+		ipField = new JTextField(16);
+		portField = new JTextField(5);
 		
+		parametersButton = new JButton("Save Parameters");
+		parametersButton.addActionListener(new TimeClock.ActionListenerParametersButton());
 		ipLabel.setLabelFor(ipField);
 		portLabel.setLabelFor(portField);
 		ipLabel.setDisplayedMnemonic('I');
@@ -39,5 +40,17 @@ public final class JPanelParametersView extends JPanel
 		this.add(portField);
 		this.add(parametersButton);
 		
+	}
+	public String getIpFieldContent() 
+	{
+		return ipField.getText();
+	}
+	public String getPortFieldContent() 
+	{
+		return portField.getText();
+	}
+	public JTextField getIpField() 
+	{
+		return this.ipField;
 	}
 }

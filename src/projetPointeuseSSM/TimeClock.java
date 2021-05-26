@@ -1,7 +1,12 @@
 package projetPointeuseSSM;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -14,7 +19,18 @@ public class TimeClock {
 	private int tcpPort;
 	private InetAddress ipAddress;
 	private Socket clientSocket;
-	
+
+
+	public static class ActionListenerParametersButton implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			System.out.println("ça marche");
+
+		}
+	}
+
 	/*****************
 	 * Constructors
 	 ****************/
@@ -24,14 +40,14 @@ public class TimeClock {
 		PTSNombreEmployeeHome = 0;
 		asDEPEmployeeHome = new ArrayList<Employee>();
 		try {
-		ipAddress = Inet4Address.getLocalHost();
-		clientSocket = new Socket();
+			ipAddress = Inet4Address.getLocalHost();
+			clientSocket = new Socket();
 		}
 		catch(Exception e) 
 		{
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
 	public TimeClock(int ArgPort, byte[] ipAddr) {
 		PTSNombreEmployeeWork = 0;
@@ -47,12 +63,6 @@ public class TimeClock {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	}
-	public TimeClock(int NombreEmployeeWork, int NombreEmployeeHome) {
-		PTSNombreEmployeeWork = NombreEmployeeWork;
-		asDEPEmployeeWork = new ArrayList<Employee>(NombreEmployeeWork);
-		PTSNombreEmployeeHome = NombreEmployeeHome;
-		asDEPEmployeeHome = new ArrayList<Employee>(NombreEmployeeHome);
 	}
 	public TimeClock(ArrayList<Employee> ArgEmployeeWork, ArrayList<Employee> ArgEmployeeHome) {
 		if(this.PTSNombreEmployeeWork>0){
@@ -70,54 +80,30 @@ public class TimeClock {
 		PTSNombreEmployeeHome = ArgEmployeeHome.size();
 		asDEPEmployeeHome = ArgEmployeeHome;
 	}
-	/*****************
-	 * Methods
-	 ****************/
-	
-	/*
-	 * @brief Get the list of workers 
-	 * @return ArrayList<Employee>
-	 */
-	public ArrayList<Employee> GetListofEmployeeWork(){
-		return asDEPEmployeeWork;
-	}
-	/*
-	 * @brief Get the list of workers at home
-	 * @return ArrayList<Employee>
-	 */
-	public ArrayList<Employee> GetListofEmployeeHome(){
-		return asDEPEmployeeHome;
-	}
+
 	/*
 	 * @brief Get the port of the Time clock
 	 * @return int
 	 */
-	public int GetTimeClockPort() {
+	public int getTimeClockPort() {
 		return this.tcpPort;
-	}
-	/*
-	 * @brief Set the list of workers 
-	 * @param ArgEmployeeWork : A list of workers
-	 */
-	public void SetListofEmployeeWork(ArrayList<Employee> ArgEmployeeWork){
-		this.asDEPEmployeeWork = ArgEmployeeWork;
-	}
-	/*
-	 * @brief Set the list of workers at home
-	 * @param ArgEmployeeHome : A list of workers at home
-	 */
-	public void SetListofEmployeeHome(ArrayList<Employee> ArgEmployeeHome){
-		this.asDEPEmployeeHome = ArgEmployeeHome;
-	}
-	/*
-	 * @brief Set the port of time clock 
-	 * @param ArgPort : a new port 
-	 */
-	public void SetTimeClockPort(int ArgPort){
-		this.tcpPort = ArgPort;
 	}
 	static public LocalTime RoundTime() 
 	{
 		return LocalTime.now().minusMinutes(LocalTime.now().getMinute()%15);
+	}
+	public void setClientSocket(int ArgPort, byte[] addressToSet) 
+	{
+		try {
+			this.clientSocket = new Socket(InetAddress.getByAddress(addressToSet), ArgPort);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void setClientSocket(Socket socketParam) 
+	{
+		this.clientSocket = socketParam;
+		this.ipAddress = socketParam.getInetAddress();
+		this.tcpPort = socketParam.getPort();
 	}
 }

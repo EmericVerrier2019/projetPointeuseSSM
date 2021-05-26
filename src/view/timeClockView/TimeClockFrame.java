@@ -26,7 +26,7 @@ public class TimeClockFrame extends JFrame{
 	{
 		// define the organization of JFrame : one JTabbedPane which embed two JPanel
 		JTabbedPane timeClockPane = new JTabbedPane();
-		JPanelTimeClock timeClockTab = new JPanelTimeClock();
+		JPanelTimeClockView timeClockTab = new JPanelTimeClockView();
 		JPanelParametersView parametersTab = new JPanelParametersView();
 		
 		

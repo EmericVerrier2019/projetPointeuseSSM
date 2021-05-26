@@ -1,20 +1,25 @@
 package view;
 
 import javax.swing.JFrame;
+import view.JPanel.*;
 
 public class MainFrame extends JFrame{
 	
-	public MainFrame(){
+	private ManagementPanel gestionManagementPanel;
+	
+	public MainFrame() {
 		super();
- 
-		build();//On initialise notre fenêtre
+		IHMSetUp();
 	}
- 
-	private void build(){
-		setTitle("Gestion des employés"); //On donne un titre à l'application
-		setSize(320,240); //On donne une taille à notre fenêtre
-		setLocationRelativeTo(null); //On centre la fenêtre sur l'écran
-		setResizable(true); //On interdit la redimensionnement de la fenêtre
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+	
+	private void IHMSetUp() {
+		setTitle("Gestion des employes"); //give name at application
+		setSize(500,500); //give the size of Frame
+		setLocationRelativeTo(null); //put at the center of the screen
+		setResizable(true); //we allow the Resizable of the frame
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Set the default closing of frame when we click on the red cross
+		
+		gestionManagementPanel = new ManagementPanel();
+		setContentPane(gestionManagementPanel);
 	}
 }

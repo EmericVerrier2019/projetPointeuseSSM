@@ -1,12 +1,10 @@
 package view.timeClockView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 
 import projetPointeuseSSM.TimeClock;
 import projetPointeuseSSM.TimeClock.ActionListenerParametersButton;
@@ -26,8 +24,8 @@ public final class JPanelParametersView extends JPanel
 		portLabel = new JLabel("Port : ");
 		ipField = new JTextField(16);
 		portField = new JTextField(5);
-		
 		parametersButton = new JButton("Save Parameters");
+		
 		parametersButton.addActionListener(new TimeClock.ActionListenerParametersButton());
 		ipLabel.setLabelFor(ipField);
 		portLabel.setLabelFor(portField);

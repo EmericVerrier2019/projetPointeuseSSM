@@ -1,4 +1,4 @@
-package view.JPanel;
+package view;
 
 import java.awt.BorderLayout;
 

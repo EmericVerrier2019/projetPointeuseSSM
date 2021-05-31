@@ -18,54 +18,7 @@ public class AddEmployeeCongtroller implements ActionListener {
 	 */
 	private MainFrame view;
 	
-	/**
-	 * La fenetre servant pour le formulaire d'inscription
-	 */
-	private JDialog formIncription;
 	
-	/**
-	 * le prenom de l'employe
-	 */
-	private JTextField firstNameEmployee;
-	
-	/**
-	 * le nom de l'employe
-	 */
-	private JTextField lastNameEmployee;
-	
-	/**
-	 * liste des noms des departements
-	 */
-	private Object[] nounDepartment;
-	
-	/**
-	 * liste deroulante pour les departements
-	 */
-	private JComboBox listDepartment;
-	
-	
-	/**
-	 * 
-	 * @param view
-	 * @param formIncription
-	 * @param firstNameEmployee
-	 * @param lastNameEmployee
-	 * @param nounDepartment
-	 * @param listDepartment
-	 */
-	public AddEmployeeCongtroller(MainFrame view, JDialog formIncription, JTextField firstNameEmployee,
-			JTextField lastNameEmployee, Object[] nounDepartment, JComboBox listDepartment) {
-		super();
-		this.view = view;
-		this.formIncription = formIncription;
-		this.firstNameEmployee = firstNameEmployee;
-		this.lastNameEmployee = lastNameEmployee;
-		this.nounDepartment = nounDepartment;
-		this.listDepartment = listDepartment;
-	}
-
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

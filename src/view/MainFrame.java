@@ -1,17 +1,15 @@
 package view;
 
-import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
-import projetPointeuseSSM.Employee;
-import view.JPanel.*;
+
+
+
 
 public class MainFrame extends JFrame{
-	private JTable tb;
+	
 	private ManagementPanel gestionManagementPanel;
 	private TicketPanel ticketPanel; 
 	private JTabbedPane menuTab;

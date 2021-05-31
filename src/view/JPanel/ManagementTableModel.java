@@ -49,7 +49,7 @@ public class ManagementTableModel extends AbstractTableModel{
 	public String getColumnName(int columnIndex) {
 		return header[columnIndex];
 	}
-	//header : {id , nom, prenom,  suppr}
+	
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch(columnIndex) {
 		case 0:

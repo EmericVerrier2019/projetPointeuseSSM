@@ -18,7 +18,6 @@ public class ManagementPanel extends JPanel{
 	
 	public ManagementPanel() {
 		super();
-		setName("Accueil");
 		IHMSetUp();
 	}
 	
@@ -35,7 +34,6 @@ public class ManagementPanel extends JPanel{
 		String[] header = {"id","prenom","nom",""};
 		tableModel.setHeader(header);
 		tb = new JTable(tableModel);
-		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(tb),BorderLayout.CENTER);
 		this.add(new JButton("ajouter"),BorderLayout.SOUTH);
 		

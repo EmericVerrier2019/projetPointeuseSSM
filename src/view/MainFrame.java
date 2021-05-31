@@ -1,10 +1,16 @@
 package view;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import projetPointeuseSSM.Employee;
 import view.JPanel.*;
 
 public class MainFrame extends JFrame{
-	
+	private JTable tb;
 	private ManagementPanel gestionManagementPanel;
 	
 	public MainFrame() {
@@ -21,5 +27,17 @@ public class MainFrame extends JFrame{
 		
 		gestionManagementPanel = new ManagementPanel();
 		setContentPane(gestionManagementPanel);
+		ManagementTableModel tableModel = new ManagementTableModel();
+		
+		Employee test = new Employee();
+		test.setFirstNameEmployee("Prenom"); 
+		test.setLastNameEmployee("nom");
+		test.setIdDepartment(1);
+		test.setIdEmployee(1);
+		tableModel.addEmployee(test);
+		String[] header = {"id","prenom","nom",""};
+		tableModel.setHeader(header);
+		tb = new JTable(tableModel);
+		getContentPane().add(new JScrollPane(tb),BorderLayout.CENTER);
 	}
 }

@@ -10,12 +10,38 @@ public class ManagementTableModel extends AbstractTableModel{
 	private ArrayList<Employee> employees;
 	private String[] header;
 	
-	//header : {id , nom, prenom, idDepartement, nomDepartement, loupe, suppr}
+	public ManagementTableModel() {
+		super();
+		this.employees = new ArrayList<Employee>();
+	}
 	
+	public ManagementTableModel(ArrayList<Employee> employees, String[] header) {
+		super();
+		this.employees = employees;
+		this.header = header;
+	}
+	
+	public ArrayList<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(ArrayList<Employee> employees) {
+		this.employees = employees;
+	}
+
+	public String[] getHeader() {
+		return header;
+	}
+
+	public void setHeader(String[] header) {
+		this.header = header;
+	}
+
 	public int getRowCount() {
 		return employees.size();
 	}
 	
+
 	public int getColumnCount() {
 		return header.length;
 	}
@@ -48,5 +74,6 @@ public class ManagementTableModel extends AbstractTableModel{
 		
 	}
 
+	
 
 }

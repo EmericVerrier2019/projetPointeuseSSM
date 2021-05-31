@@ -18,6 +18,7 @@ public class ManagementPanel extends JPanel{
 	
 	public ManagementPanel() {
 		super();
+		setName("Accueil");
 		IHMSetUp();
 	}
 	

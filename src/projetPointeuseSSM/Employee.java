@@ -19,13 +19,12 @@
 
 package projetPointeuseSSM;
 
-
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 
 import org.w3c.dom.events.EventException;
 
-public class Employee {
+public class Employee implements Comparable<Employee> {
 
 	private int idEmployee;
 	private String lastNameEmployee;
@@ -240,5 +239,11 @@ public class Employee {
 			planning.PlanningStub();
 			setHoursToDo(planning.getWeeklyWorkedHours());
 		}
+	}
+
+	@Override
+	public int compareTo(Employee o) {
+		// TODO Auto-generated method stub
+		return this.idEmployee - o.idEmployee;
 	}
 }

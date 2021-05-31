@@ -1,16 +1,17 @@
 package projetPointeuseSSM;
 
-import java.time.*;
-import java.time.chrono.ChronoLocalDate;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.List;
 
 import javax.swing.SwingUtilities;
-import view.*;
+
+import view.MainFrame;
 public class Main {
 
 	public static void main(String[] args)
@@ -112,6 +113,9 @@ public class Main {
 		//tutoriel pour montrer un peu l'utilisation : https://www.vogella.com/tutorials/JavaDateTimeAPI/article.html
 	}
 	
+	/**
+	 * @brief fonction qui instancie une entreprise a partir de rien
+	 */
 	public void Strump() {
 		//Creation of four employee
 		Employee Employe1 = new Employee();

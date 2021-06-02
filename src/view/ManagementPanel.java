@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import controller.addEmployeeController;
 import projetPointeuseSSM.Employee;
 
 public class ManagementPanel extends JPanel{
@@ -37,7 +38,9 @@ public class ManagementPanel extends JPanel{
 		tb = new JTable(tableModel);
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(tb),BorderLayout.CENTER);
-		this.add(new JButton("ajouter"),BorderLayout.SOUTH);
+		JButton addEmployeeButton = new JButton("ajouter");
+		addEmployeeButton.addActionListener(new addEmployeeController());
+		this.add(addEmployeeButton,BorderLayout.SOUTH);
 		
 	}
 	

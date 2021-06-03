@@ -2,19 +2,25 @@ package view;
 
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
 import projetPointeuseSSM.Ticket;
 
-public class TicketTableModel  implements TableModel{
+public class TicketTableModel  extends AbstractTableModel{
 	private ArrayList<Ticket> ticketsList;
 	private String[] header;
 	public TicketTableModel(ArrayList<Ticket> ticketList, String[] header) 
 	{
 		this.ticketsList = ticketList;
 		this.header = header;
+	}
+	public TicketTableModel()
+	{
+		this.ticketsList = new ArrayList<Ticket>();
+		this.header = new String[] {"Id Employé","Arrivées","Départ","Departement"};
 	}
 	@Override
 	public int getRowCount() {
@@ -28,32 +34,24 @@ public class TicketTableModel  implements TableModel{
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		
-		return null;
+		switch(columnIndex) 
+		{
+		case 0:
+			return ticketsList.get(rowIndex).getIdEmployee();
+		case 1:
+			return ticketsList.get(rowIndex).getTicketDateTime();
+		default:
+			return null;
+		}
 	}
 
 	@Override
 	public String getColumnName(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		return header[columnIndex];
 	}
-
-	@Override
-	public Class<?> getColumnClass(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		
+				return false;
 	}
 
 	@Override

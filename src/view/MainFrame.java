@@ -1,6 +1,9 @@
 package view;
 
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
@@ -25,7 +28,6 @@ public class MainFrame extends JFrame{
 		this.setLocationRelativeTo(null); //put at the center of the screen
 		this.setResizable(true); //we allow the Resizable of the frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Set the default closing of frame when we click on the red cross
-		
 		menuTab = new JTabbedPane();
 		gestionManagementPanel = new ManagementPanel();
 		ticketPanel = new TicketPanel();

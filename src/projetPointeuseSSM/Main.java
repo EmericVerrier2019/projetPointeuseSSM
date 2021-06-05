@@ -21,10 +21,18 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				//On cr�e une nouvelle instance de notre JDialog
-				MainFrame fenetre = new MainFrame();
-				MainFrameController controllerMainFrame = new MainFrameController();
+				Company company = new Company("Company");
+				Department dep =  new Department();
+				Department dep1 =  new Department();
+				dep.setDepartmentName("RH");
+				dep1.setDepartmentName("Prod");
+				company.addDepartment(dep);
+				company.addDepartment(dep1);
+			
+				MainFrame fenetre = new MainFrame(company);
+				MainFrameController controllerMainFrame = new MainFrameController(company);
 				controllerMainFrame.setMainFrame(fenetre);
-				fenetre.setVisible(true);//On la rend visible
+				
 			}
 		});
 

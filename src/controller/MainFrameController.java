@@ -12,22 +12,25 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import projetPointeuseSSM.Company;
 import projetPointeuseSSM.Employee;
 import projetPointeuseSSM.Ticket;
 import view.MainFrame;
 
 public class MainFrameController{
 
+	private Company company ;
 	private ArrayList<Ticket> entryTicketList;
 	private ArrayList<Ticket> exitTicketList;
 	private ArrayList<Employee> employeeList;
 	private MainFrame mainFrame;
-	public MainFrameController()
+	public MainFrameController(Company company)
 	{
+		this.company = company;
 		entryTicketList = new ArrayList<Ticket>();
 		exitTicketList = new ArrayList<Ticket>();
 		employeeList = new ArrayList<Employee>();
-		mainFrame = new MainFrame();
+		mainFrame = new MainFrame(company);
 		
 		
 	}

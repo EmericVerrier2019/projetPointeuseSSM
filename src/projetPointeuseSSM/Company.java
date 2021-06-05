@@ -66,6 +66,7 @@ public class Company {
 	public void addDepartment(Department department) {
 		try {
 			if(department != null && !listDepartments.contains(department)) {
+				department.setDepartmentNumber(listDepartments.size() + 1);
 				listDepartments.add(department);
 			}
 		}

@@ -27,11 +27,11 @@ public class Planning {
 	public void PlanningStub() 
 	{
 		dayList = new ArrayList<Day>();
-		Day monday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"monday");
-		Day tuesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"tuesday");
-		Day wednesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"wednesday");
-		Day thursday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"thursday");
-		Day friday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"friday");
+		Day monday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Lundi");
+		Day tuesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Mardi");
+		Day wednesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Mercredi");
+		Day thursday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Jeudi");
+		Day friday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Vendredi");
 		
 		dayList.add(monday);
 		dayList.add(tuesday);

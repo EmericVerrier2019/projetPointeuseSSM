@@ -8,7 +8,7 @@ public class Company {
 
 	private String nom;
 	private List<Department> listDepartments;
-	private List<Employee> listEmployees;
+	private ArrayList<Employee> listEmployees;
 	
 	/***********************/
 	/***** Constructor *****/
@@ -20,7 +20,7 @@ public class Company {
 		this.listDepartments = new ArrayList<Department>();
 		this.listEmployees = new ArrayList<Employee>();
 	}
-	public Company(String argNom, List<Department> argListD, List<Employee> argListE) {
+	public Company(String argNom, List<Department> argListD, ArrayList<Employee> argListE) {
 		this.nom = argNom;
 		this.listDepartments = argListD;
 		this.listEmployees = argListE;
@@ -33,7 +33,7 @@ public class Company {
 	public String getNom() {
 		return nom;
 	}
-	public List<Employee> getListEmployees() {
+	public ArrayList<Employee> getListEmployees() {
 		return listEmployees;
 	}
 	public List<Department> getListDepartment() {
@@ -51,7 +51,7 @@ public class Company {
 		this.listDepartments = listDepartment;
 	}
 	
-	public void setListEmployees(List<Employee> listEmployees) {
+	public void setListEmployees(ArrayList<Employee> listEmployees) {
 		this.listEmployees = listEmployees;
 	}
 	

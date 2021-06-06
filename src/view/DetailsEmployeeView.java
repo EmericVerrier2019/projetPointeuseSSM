@@ -7,8 +7,12 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.w3c.dom.events.EventException;
 
+import controller.addEmployeeController;
 import projetPointeuseSSM.Company;
 import projetPointeuseSSM.Day;
 import projetPointeuseSSM.Department;
@@ -44,6 +49,12 @@ public class DetailsEmployeeView extends JDialog {
 	 * Entreprise gérée par l'applicaiton
 	 */
 	private Company company;
+	
+	/*
+	 * Liste qui va contenir tous les champs de saisie pour l'ajout ou modification d'un employé
+	 * les 20 premiers correspondent au JComboBox pour les horaires de l'employé
+	 */
+	private ArrayList<Component> listComponentView = new ArrayList<Component>();
 	
 	/**
 	 * Crée la vue
@@ -113,6 +124,7 @@ public class DetailsEmployeeView extends JDialog {
 			departmentNames[i] = departments[i].getDepartmentName();
 		}
 		JComboBox<String> departmentsCombo = new JComboBox<String>(departmentNames);
+		departmentsCombo.setName("departmentsCombo");
 		
 		//champ de saisi de l'identifiant de l'employé
 		JTextField idField;
@@ -121,9 +133,12 @@ public class DetailsEmployeeView extends JDialog {
 		if (employeeIsModifiying()) {
 			idField = new JTextField(Integer.toString(employee.getIdEmployee()));
 			idField.setEnabled(false); //on interdit la modification de l'identifiant
+			idField.setName("idField");//on donne un nom qui permettra de l'identifier dans la liste des components
 			
 			firstNameField = new JTextField(employee.getFirstName());
+			firstNameField.setName("firstNameField");
 			lastNameField = new JTextField(employee.getLastName());
+			lastNameField.setName("lastNameField");
 			
 			//On indique le bon département de l'employé
 			for(int i = 0; i< departments.length; i++) {
@@ -136,8 +151,11 @@ public class DetailsEmployeeView extends JDialog {
 		//sinon on est entrain de créer un employé
 		else {
 			idField = new JTextField(Integer.toString(company.getListEmployees().size() + 1));
+			idField.setName("idField");
 			firstNameField = new JTextField();
+			firstNameField.setName("firstNameField");
 			lastNameField = new JTextField();
+			lastNameField.setName("lastNameField");
 			
 		}
 		
@@ -148,28 +166,47 @@ public class DetailsEmployeeView extends JDialog {
 		fieldsEntryPanel.add(createEntryFieldPanel("Département :",departmentsCombo));
 		fieldsEntryPanel.add(createEntryFieldPanel("Horaire de début :",startSchedulePanel));
 		fieldsEntryPanel.add(createEntryFieldPanel("Horaire de fin :",endSchedulePanel));
-		
 		//on créer un panel pour les boutons
 		JPanel allButtonsPannel = new JPanel();
 		
 		//bouton de validation
-		JButton validationButton = new JButton();
+		JButton validationButton = new JButton("Valider");
 		
 		//On modifie l'action en fonction de si on ajout ou modifie un employé
 		if(employeeIsModifiying()) {
 			
 		}else {
-			
+			validationButton.addActionListener(new addEmployeeController(this, company, listComponentView));
 		}
 		allButtonsPannel.add(validationButton);
 		
 		//Bouton pour annuler ou supprimer un employé
 		if(employeeIsModifiying()) {
-			
+			fieldsContainer.add(createEntryFieldPanel("Heures supplémentaire : "+ (employee.getHoursWorked().minus(employee.getHoursToDo()).toHours())),BorderLayout.SOUTH);
+			JButton deleteButton = new JButton("Supprimer");
+			allButtonsPannel.add(deleteButton);
+		}
+		else {
+			//Button pour annuler l'ajout de l'employée
+			JButton cancelCreationButton = new JButton("Annuler");
+			cancelCreationButton.addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
+			allButtonsPannel.add(cancelCreationButton);
 		}
 		fieldsContainer.add(fieldsEntryPanel,BorderLayout.CENTER);
 		mainContainer.add(fieldsContainer,BorderLayout.CENTER);
+		mainContainer.add(allButtonsPannel,BorderLayout.SOUTH);
 		
+		//On ajoute tous les components utilisé a la liste des components:
+		listComponentView.add(lastNameField);
+		listComponentView.add(firstNameField);
+		listComponentView.add(idField);
+		listComponentView.add(departmentsCombo);	
 		return mainContainer;
 	}
 	
@@ -193,11 +230,13 @@ public class DetailsEmployeeView extends JDialog {
 		String[] days = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi"};
 		for(int i = 0; i < 5; i++){
 			JLabel dayOfSchedule = new JLabel(days[i] +" : ");
-			dayOfSchedule.setName("Label"+format+days[i]);
 			JComboBox<String> hourField = new JComboBox<String>(hours);
 			JComboBox<String> minuteField = new JComboBox<String>(minutes);
 			hourField.setName("ComboBox hour"+format+days[i]);
 			minuteField.setName("ComboBox minute"+format+days[i]);
+			//On ajoute les components a la liste des commponent de la view
+			listComponentView.add(hourField);
+			listComponentView.add(minuteField);
 			//si on modifie l'employé on selectionne ses horaires
 			if(employeeIsModifiying()) {
 				Day currentDay = employee.getPlanning().getDayList().get(i);

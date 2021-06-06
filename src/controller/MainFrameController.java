@@ -30,7 +30,7 @@ public class MainFrameController{
 		entryTicketList = new ArrayList<Ticket>();
 		exitTicketList = new ArrayList<Ticket>();
 		employeeList = new ArrayList<Employee>();
-		mainFrame = new MainFrame(company);
+		setMainFrame(new MainFrame(company));
 		
 		
 	}

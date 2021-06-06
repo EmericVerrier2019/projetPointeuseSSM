@@ -3,11 +3,13 @@ package view;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 import projetPointeuseSSM.Company;
+import projetPointeuseSSM.Employee;
 
 
 
@@ -35,11 +37,31 @@ public class MainFrame extends JFrame{
 		menuTab = new JTabbedPane();
 		gestionManagementPanel = new ManagementPanel(this.company);
 		ticketPanel = new TicketPanel();
-		DetailsEmployeeView test = new DetailsEmployeeView(null, company);
+		
 		menuTab.add(gestionManagementPanel);
 		menuTab.add(ticketPanel);
-		test.setVisible(true);
+		
 		
 		this.setContentPane(menuTab);
+	}
+
+	public ManagementPanel getGestionManagementPanel() {
+		return gestionManagementPanel;
+	}
+
+	public TicketPanel getTicketPanel() {
+		return ticketPanel;
+	}
+
+	public JTabbedPane getMenuTab() {
+		return menuTab;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+	
+	public void updateEmployeeTable(ArrayList<Employee> listEmployee) {
+		gestionManagementPanel.updateEmployeeTableModel(listEmployee); ;
 	}
 }

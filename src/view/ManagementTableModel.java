@@ -4,21 +4,24 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import projetPointeuseSSM.Company;
 import projetPointeuseSSM.Employee;
 
 public class ManagementTableModel extends AbstractTableModel{
+	/**
+	 * Numéro de version imposé par AbstractTableModel
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Employee> employees;
-	private String[] header;
+	private String[] header = {"id","prenom","nom"} ;
 	
 	public ManagementTableModel() {
 		super();
-		this.employees = new ArrayList<Employee>();
 	}
 	
-	public ManagementTableModel(ArrayList<Employee> employees, String[] header) {
+	public ManagementTableModel(Company company) {
 		super();
-		this.employees = employees;
-		this.header = header;
+		this.employees = (ArrayList<Employee>) company.getListEmployees();
 	}
 	
 	public ArrayList<Employee> getEmployees() {
@@ -31,10 +34,6 @@ public class ManagementTableModel extends AbstractTableModel{
 
 	public String[] getHeader() {
 		return header;
-	}
-
-	public void setHeader(String[] header) {
-		this.header = header;
 	}
 
 	public int getRowCount() {
@@ -74,6 +73,9 @@ public class ManagementTableModel extends AbstractTableModel{
 		
 	}
 
-	
+	@Override
+    public boolean isCellEditable(int row, int col) {
+        return false;
+    }
 
 }

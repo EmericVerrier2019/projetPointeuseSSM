@@ -2,11 +2,9 @@ package projetPointeuseSSM;
 
 
 import java.time.Duration;
-import java.time.LocalTime;
-import java.time.Period;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalUnit;
+
 
 public class Day {
 
@@ -16,76 +14,89 @@ public class Day {
 	 * an employee timetable. 
 	 * @author Emeric Verrier
 	 */
-	private String sDAYdayName;
-	private LocalTime lDAYtimeStart;
-	private LocalTime lDAYtimeEnd;
+	private String dayName;
+	private LocalDateTime timeStart;
+	private LocalDateTime timeEnd;
 	
 	
 	/**
 	 * the default constructor of the CDay class, by default, the current time is used to define the beginning and the end of the employee day of work
 	 * and the name of the day is willingly empty.
-	 * @see LocalTime
+	 * @see LocalDateTime
 	 */
 	public Day() 
 	{
-		lDAYtimeStart = LocalTime.now();
-		lDAYtimeEnd = LocalTime.now();
-		sDAYdayName = new String("");
-		
+		timeStart = null;
+		timeEnd = null;
+		dayName = new String("");
 	}
+	
 	/**
-	 * @param timeStart
-	 * @param timeEnd
-	 * @param dayName
+	 * Constructeur 
+	 * @param timeStart heure de début
+	 * @param timeEnd heure de fin
+	 * @param dayName nom du jour
 	 */
-	public Day(LocalTime timeStart, LocalTime timeEnd, String dayName) 
+	public Day(LocalDateTime timeStart, LocalDateTime timeEnd, String dayName) 
 	{
-		this.lDAYtimeStart = timeStart;
-		this.lDAYtimeEnd = timeEnd;
-		this.sDAYdayName = dayName;
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.dayName = dayName;
 	}
+	
+	/**
+	 * Constructeur de recopie
+	 * @param otherDay le jour que l'on veut recopie
+	 */
+	public Day(Day otherDay) {
+		this.timeEnd = otherDay.timeEnd;
+		this.timeStart = otherDay.timeStart;
+		this.dayName = otherDay.dayName;	
+	}
+
+	
 	/**
 	 * basic setter to set the moment when the employee starts to work
 	 * @param timeStart
 	 */
-	public void setlDAYTimeStart(LocalTime timeStart) 
+	public void setTimeStart(LocalDateTime timeStart) 
 	{
-		this.lDAYtimeStart = roundTime(timeStart);
+		this.timeStart = roundTime(timeStart);
 	}
 	/**
 	 * basic setter to set the moment when the employee ends his day of work
 	 * @param timeEnd
 	 */
-	public void setlDAYTimeEnd(LocalTime timeEnd) 
+	public void setTimeEnd(LocalDateTime timeEnd) 
 	{
-		this.lDAYtimeEnd = roundTime(timeEnd);
+		this.timeEnd = roundTime(timeEnd);
 	}
 	/**
 	 * getter method to get the moment when the employee ends his day of work
-	 * @return lDAYTimeEnd
+	 * @return timeEnd
 	 */
-	public LocalTime getlDAYTimeEnd()
+	public LocalDateTime getTimeEnd()
 	{
-		return  this.lDAYtimeEnd;
+		return  this.timeEnd;
 	}
 	
 	
 	/**
 	 * getter method to get the moment when the employee begins his work.
-	 * @return lDayTimeStart 
+	 * @return timeStart 
 	 */
-	public LocalTime getlDAYTimeStart() 
+	public LocalDateTime getTimeStart() 
 	{
-		return this.lDAYtimeStart;
+		return this.timeStart;
 	}
 	/**
 	 * getter method to get the name of the day
-	 * @return sDAYdayName
+	 * @return dayName
 	 * 
 	 */
-	public String getsDAYdayName() 
+	public String getDayName() 
 	{
-		return this.sDAYdayName;
+		return this.dayName;
 	}
 	/**
 	 * override of the toString method to get a string representing a day object
@@ -93,7 +104,7 @@ public class Day {
 	 */
 	public String toString() 
 	{
-		return(lDAYtimeStart.toString() + " "+ lDAYtimeEnd.toString() + " " + sDAYdayName.toString());
+		return(timeStart.toString() + " "+ timeEnd.toString() + " " + dayName.toString());
 	}
 	/**
 	 * method to get the number of hours which separate the end of the day from the beginning (end - start);
@@ -101,7 +112,7 @@ public class Day {
 	 * */
 	public Duration getDailyWorkedHours() 
 	{
-		long dailyWorkedHours = lDAYtimeStart.until(lDAYtimeEnd,ChronoUnit.MINUTES);
+		long dailyWorkedHours = timeStart.until(timeEnd,ChronoUnit.MINUTES);
 		Duration hoursWorked = Duration.of(dailyWorkedHours,ChronoUnit.MINUTES);
 		return hoursWorked;
 	}
@@ -111,7 +122,7 @@ public class Day {
 	 * @param time l'heure que l'on veut arrondir
 	 * @return l'heure arroudie au quart d'heure supérieur
 	 */
-	public static LocalTime roundTime(LocalTime time) {
+	public static LocalDateTime roundTime(LocalDateTime time) {
 		if (time.getMinute() < 8) {
 			time = time.minusMinutes(time.getMinute());
 		} else if (time.getMinute() < 16) {
@@ -148,5 +159,32 @@ public class Day {
 		return r;
 	}
 
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Day other = (Day) obj;
+		if (dayName == null) {
+			if (other.dayName != null)
+				return false;
+		} else if (!dayName.equals(other.dayName))
+			return false;
+		if (timeEnd == null) {
+			if (other.timeEnd != null)
+				return false;
+		} else if (!timeEnd.equals(other.timeEnd))
+			return false;
+		if (timeStart == null) {
+			if (other.timeStart != null)
+				return false;
+		} else if (!timeStart.equals(other.timeStart))
+			return false;
+		return true;
+	}
 
 }

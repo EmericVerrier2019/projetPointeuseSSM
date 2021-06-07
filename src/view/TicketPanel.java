@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import projetPointeuseSSM.Ticket;
+import projetPointeuseSSM.TableModel.TicketTableModel;
 
 public class TicketPanel extends JPanel 
 {

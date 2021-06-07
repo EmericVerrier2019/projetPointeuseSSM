@@ -32,7 +32,7 @@ public class EmployeeSimpleTest {
 	    System.out.println("End of the started test");
 	}
 	
-	
+	/*
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	@Test
@@ -54,4 +54,5 @@ public class EmployeeSimpleTest {
 		test.updateHoursToDo();
 		assertThat(test.getHoursToDo(),is(equalTo(Duration.ofHours(45))));
 	}
+	*/
 }

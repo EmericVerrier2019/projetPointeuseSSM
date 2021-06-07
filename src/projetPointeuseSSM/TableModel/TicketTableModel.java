@@ -1,4 +1,4 @@
-package view;
+package projetPointeuseSSM.TableModel;
 
 import java.util.ArrayList;
 

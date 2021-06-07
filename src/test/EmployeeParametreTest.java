@@ -56,6 +56,7 @@ public class EmployeeParametreTest {
         });
     }
 	
+	/*
 	@Test
     public void testAddHourDo() {
 		System.out.println("Test add a hour that the employee has done");
@@ -65,6 +66,7 @@ public class EmployeeParametreTest {
         assertEquals(expected, employee.getHoursWorked());
 		
     }
+    */
 	
 }
 

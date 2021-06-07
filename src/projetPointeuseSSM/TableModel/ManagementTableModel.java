@@ -58,7 +58,12 @@ public class ManagementTableModel extends AbstractTableModel{
 		case 2:
 			return employees.get(rowIndex).getFirstName();
 		case 3:
-			return employees.get(rowIndex).getIsWorking();
+			if ( (employees.get(rowIndex).getReportingOfDayWorked().getCurrentDay() == null) 
+					|| (employees.get(rowIndex).getReportingOfDayWorked().getCurrentDay().getTimeStart() == null) ){
+				return false;			
+			}else {
+				return true;
+			}
 		default:
 			return null;		
 		}

@@ -53,11 +53,9 @@ public class Main {
 		test.setLastNameEmployee("nom");
 		test.setIdDepartment(1);
 		test.setIdEmployee(1);
-		test.addHourWorked(Duration.ofHours(5));
 		Planning pla = new Planning();
 		pla.PlanningStub();
 		test.setPlanning(pla);
-		test.updateHoursToDo();
 		Main.company.addEmployee(test, dep);
 	}
 }

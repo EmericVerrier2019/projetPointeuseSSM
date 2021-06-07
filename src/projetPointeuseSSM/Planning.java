@@ -1,6 +1,8 @@
 package projetPointeuseSSM;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -27,11 +29,11 @@ public class Planning {
 	public void PlanningStub() 
 	{
 		dayList = new ArrayList<Day>();
-		Day monday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Lundi");
-		Day tuesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Mardi");
-		Day wednesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Mercredi");
-		Day thursday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Jeudi");
-		Day friday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"Vendredi");
+		Day monday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Lundi");
+		Day tuesday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Mardi");
+		Day wednesday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Mercredi");
+		Day thursday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Jeudi");
+		Day friday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Vendredi");
 		
 		dayList.add(monday);
 		dayList.add(tuesday);

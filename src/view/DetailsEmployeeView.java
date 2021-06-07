@@ -184,7 +184,20 @@ public class DetailsEmployeeView extends JDialog {
 		
 		//Bouton pour annuler ou supprimer un employé
 		if(employeeIsModifiying()) {
-			fieldsContainer.add(createEntryFieldPanel("Heures supplémentaire : "+ (employee.getHoursWorked().minus(employee.getHoursToDo()).toHours())),BorderLayout.SOUTH);
+			
+			//affichage des heures supplémentaire
+			
+			String displayOverTimeHour;//permet de gérer l'affichage des heures supplémentaire
+			long numberOverTimeHour = employee.getReportingOfDayWorked().getOverTimeHour().toHours();
+			if(numberOverTimeHour == 0) {
+				displayOverTimeHour = "Aucunes";
+			}
+			else {
+				displayOverTimeHour = Long.toString(numberOverTimeHour);
+			}
+			fieldsContainer.add(createEntryFieldPanel("Heures supplémentaires : "+ displayOverTimeHour),BorderLayout.SOUTH);
+			
+			
 			JButton deleteButton = new JButton("Supprimer");
 			deleteButton.addActionListener(new deleteEmployeeController(this, company, employee));
 			allButtonsPannel.add(deleteButton);
@@ -244,15 +257,15 @@ public class DetailsEmployeeView extends JDialog {
 				int numberMinute;
 				switch (format) {
 					case "start":
-						numberHour = currentDay.getlDAYTimeStart().getHour();
+						numberHour = currentDay.getTimeStart().getHour();
 						hourField.setSelectedIndex(numberHour);
-						numberMinute = currentDay.getlDAYTimeStart().getMinute();
+						numberMinute = currentDay.getTimeStart().getMinute();
 						minuteField.setSelectedIndex((numberMinute/15)); //on divise par 15 pour récupérer l'indice dans la liste déroulante de valeur (00,15,30,45)
 						break;
 					case "end":
-						numberHour = currentDay.getlDAYTimeEnd().getHour();
+						numberHour = currentDay.getTimeEnd().getHour();
 						hourField.setSelectedIndex(numberHour);
-						numberMinute = currentDay.getlDAYTimeEnd().getMinute();
+						numberMinute = currentDay.getTimeEnd().getMinute();
 						minuteField.setSelectedIndex((numberMinute/15));
 						break;
 				}				

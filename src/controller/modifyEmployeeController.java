@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -61,10 +63,10 @@ public class modifyEmployeeController implements ActionListener {
 	 * @param minutesCombo Liste déroulante contenant les minutes
 	 * @return L'heure créee à partir des deux listes déroulantes
 	 */
-	private LocalTime createLocalTimeHour(JComboBox<String> hourCombo,JComboBox<String> minutesCombo) {
+	private LocalDateTime createLocalTimeHour(JComboBox<String> hourCombo,JComboBox<String> minutesCombo) {
 		int numberHour = Integer.parseInt((String) hourCombo.getSelectedItem());
 		int numberMinutes = Integer.parseInt((String) minutesCombo.getSelectedItem());
-		return LocalTime.of(numberHour,numberMinutes);
+		return LocalDateTime.of(LocalDate.now(),LocalTime.of(numberHour, numberMinutes));
 	}
 
 	@Override
@@ -115,11 +117,11 @@ public class modifyEmployeeController implements ActionListener {
 			//Lors de la création de la liste des components les 20 premiers servent pour le planning
 			//les 10 premiers pour les heures d'arriver et les 10 autres pour les de départ de la journée
 			for(int i = 0; i < 10; i += 2) {
-				LocalTime beginningHour = createLocalTimeHour((JComboBox<String>)listComponentView.get(i),(JComboBox<String>)listComponentView.get(i+1));
-				LocalTime enddingHour = createLocalTimeHour((JComboBox<String>)listComponentView.get(i+10),(JComboBox<String>)listComponentView.get(i+11));
+				LocalDateTime beginningHour = createLocalTimeHour((JComboBox<String>)listComponentView.get(i),(JComboBox<String>)listComponentView.get(i+1));
+				LocalDateTime enddingHour = createLocalTimeHour((JComboBox<String>)listComponentView.get(i+10),(JComboBox<String>)listComponentView.get(i+11));
 				//On défini les horaires
-				planning.getDayList().get(i/2).setlDAYTimeStart(beginningHour);
-				planning.getDayList().get(i/2).setlDAYTimeEnd(enddingHour);
+				planning.getDayList().get(i/2).setTimeStart(beginningHour);
+				planning.getDayList().get(i/2).setTimeEnd(enddingHour);
 			}
 			
 			employee.setFirstNameEmployee(firstFieldName.getText());
@@ -127,7 +129,6 @@ public class modifyEmployeeController implements ActionListener {
 			employee.setIdEmployee(Integer.parseInt(idField.getText()));
 			employee.setIdDepartment(department.getDepartmentNumber());
 			employee.setPlanning(planning);
-			employee.updateHoursToDo();//on recalcul les heures à faire
 			Main.mainFrame.updateEmployeeTable(company.getListEmployees());
 			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 		} catch(Exception ex) {

@@ -19,10 +19,7 @@
 
 package projetPointeuseSSM;
 
-import java.time.*;
-import java.time.temporal.ChronoUnit;
 
-import org.w3c.dom.events.EventException;
 
 public class Employee implements Comparable<Employee> {
 
@@ -31,9 +28,7 @@ public class Employee implements Comparable<Employee> {
 	private String firstNameEmployee;
 	private int idDepartment;
 	private Planning planningEmployee;
-	private Duration hoursToDo;
-	private Duration hoursWorked;
-	private boolean isWorking; //this boolean mean the employee is present at work
+	private Reporting reportingOfDayWorked;
 	
 	/***********************/
 	/***** Constructor *****/
@@ -43,7 +38,7 @@ public class Employee implements Comparable<Employee> {
 	 * Default constructor, which create Employee
 	 */
 	public Employee(){
-		setHoursWorked(Duration.of(0,ChronoUnit.HOURS));
+		reportingOfDayWorked = new Reporting(this);
 	}
 	
 	/**
@@ -56,7 +51,7 @@ public class Employee implements Comparable<Employee> {
 		setLastNameEmployee(lastName);
 		setIdDepartment(idDepartment);
 		setIdEmployee(idEmployee);
-		setHoursWorked(Duration.of(0,ChronoUnit.HOURS));
+		reportingOfDayWorked = new Reporting(this);
 	}
 	
 	/**
@@ -67,7 +62,7 @@ public class Employee implements Comparable<Employee> {
 	public Employee(int idDepartment, int idEmployee) {
 		setIdDepartment(idDepartment);
 		setIdEmployee(idEmployee);
-		setHoursWorked(Duration.of(0,ChronoUnit.HOURS));
+		reportingOfDayWorked = new Reporting(this);
 		
 	}
 	
@@ -118,34 +113,18 @@ public class Employee implements Comparable<Employee> {
 	}
 	
 	/**
-	 * Update the attribute hoursTheory
-	 * @param Duration newHour, the new employee's number of hours to do that we want to set
+	 * permet de modifié le reporting des jours travaillés
+	 * @param reportingOfDayWorked un objet de la classe Reporting
 	 */
-	private void setHoursToDo(Duration newHours) {
-		this.hoursToDo = newHours;
-	}
-	
-	/**
-	 * Update the attribute hoursDo
-	 * @param Duration newHour, the new employee's number of hours completed that we want to set
-	 * 
-	 */
-	private void setHoursWorked(Duration newHours) {
-		this.hoursWorked = newHours;
-	}
-	
-	/**
-	 * Update the attribute isWorking
-	 * @param boolean isWorking, we want to set if the employee is present at work
-	 */
-	public void setIsWorking(boolean isWorking) {
-		this.isWorking = isWorking;
+	public void setReportingOfDayWorked(Reporting reportingOfDayWorked) {
+		this.reportingOfDayWorked = reportingOfDayWorked;
 	}
 	
 	/******************/
 	/***** Getter *****/
 	/******************/
 	
+
 	/**
 	 * Return the attribute idEmployee
 	 * @return int idEmployee
@@ -187,60 +166,28 @@ public class Employee implements Comparable<Employee> {
 	}
 	
 	/**
-	 * Return the attribute hoursTheory
-	 * @return LocalTime hoursTheory;
+	 * Renvoi le reporting rattaché à l'employé
+	 * @return reporting de l'employé
 	 */
-	public Duration getHoursToDo() {
-		return this.hoursToDo;
+	public Reporting getReportingOfDayWorked() {
+		return reportingOfDayWorked;
 	}
-	
-	/**
-	 * Return the attribute hoursDo
-	 * @return LocalTime hoursDo
-	 */
-	public Duration getHoursWorked() {
-		return this.hoursWorked;
-	}
-	
-	/**
-	 * Return the attribute isWorking
-	 * @return boolean isWorking
-	 */
-	public boolean getIsWorking() {
-		return this.isWorking;
-	}
-	
+
 	/*******************/
 	/***** Methods *****/
 	/*******************/
 	
-	
-	public void addHourWorked(Duration hour) {
-		setHoursWorked(getHoursWorked().plus(hour));
-	}
-	
+	@Override
 	public String toString() {
-		return "Employé avec l'identifiant: "+getIdEmployee()+System.lineSeparator()+
-				"Nom: "+getLastName()+" Prenom: "+getFirstName()+System.lineSeparator()+
-				"Identifiant de son departement: "+getIdDepartment()+System.lineSeparator()+
-				"Heures que l'employé doit faire: "+getHoursToDo()+System.lineSeparator()+
-				"Heures que l'employé a réalisé: "+getHoursWorked()+System.lineSeparator()+
-				"L'employé est présent sur le lieu de travail: "+getIsWorking();
-	}
-	
-	public void updateHoursToDo() {
-		if (getPlanning() == null ) {
-			String errorMessage = "The employe's planning is not set";
-			short codeError = 1;
-			throw new EventException(codeError,errorMessage);
-		}else {
-			setHoursToDo(getPlanning().getWeeklyWorkedHours());
-		}
+		return "Employee [idEmployee=" + idEmployee + ", lastNameEmployee=" + lastNameEmployee + ", firstNameEmployee="
+				+ firstNameEmployee + ", idDepartment=" + idDepartment + ", planningEmployee=" + planningEmployee
+				+ ", reportingOfDayWorked=" + reportingOfDayWorked + "]";
 	}
 
 	@Override
 	public int compareTo(Employee o) {
-		// TODO Auto-generated method stub
+		
 		return this.idEmployee - o.idEmployee;
 	}
+
 }

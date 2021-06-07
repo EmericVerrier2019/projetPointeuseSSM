@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.junit.After;
@@ -35,8 +37,8 @@ public class DayTest {
 	@Test
 	public void testGetsDAYdayName() 
 	{
-		Day testDay = new Day(LocalTime.of(8, 0),LocalTime.of(15, 0),"monday");
-		assertEquals("monday", testDay.getsDAYdayName());
+		Day testDay = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Lundi");
+		assertEquals("Lundi", testDay.getDayName());
 	}
 
 }

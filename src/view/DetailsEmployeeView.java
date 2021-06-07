@@ -189,6 +189,7 @@ public class DetailsEmployeeView extends JDialog {
 			
 			String displayOverTimeHour;//permet de gérer l'affichage des heures supplémentaire
 			long numberOverTimeHour = employee.getReportingOfDayWorked().getOverTimeHour().toHours();
+			System.out.println(numberOverTimeHour);
 			if(numberOverTimeHour == 0) {
 				displayOverTimeHour = "Aucunes";
 			}

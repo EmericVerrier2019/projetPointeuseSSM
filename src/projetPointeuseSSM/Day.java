@@ -3,8 +3,9 @@ package projetPointeuseSSM;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
-
+import java.util.Locale;
 
 public class Day {
 
@@ -35,9 +36,23 @@ public class Day {
 	 * Constructeur 
 	 * @param timeStart heure de début
 	 * @param timeEnd heure de fin
+	 */
+	public Day(LocalDateTime timeStart, LocalDateTime timeEnd) 
+	{
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		if(timeEnd != null) {
+			setDayName(timeEnd);
+		}
+	}
+	
+	/**
+	 * Constructeur 
+	 * @param timeStart heure de début
+	 * @param timeEnd heure de fin
 	 * @param dayName nom du jour
 	 */
-	public Day(LocalDateTime timeStart, LocalDateTime timeEnd, String dayName) 
+	public Day(LocalDateTime timeStart, LocalDateTime timeEnd,String dayName) 
 	{
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
@@ -62,6 +77,7 @@ public class Day {
 	public void setTimeStart(LocalDateTime timeStart) 
 	{
 		this.timeStart = roundTime(timeStart);
+		setDayName(timeStart);
 	}
 	/**
 	 * basic setter to set the moment when the employee ends his day of work
@@ -69,7 +85,18 @@ public class Day {
 	 */
 	public void setTimeEnd(LocalDateTime timeEnd) 
 	{
-		this.timeEnd = roundTime(timeEnd);
+		if(timeStart.getDayOfWeek().equals(timeEnd.getDayOfWeek())) {
+			this.timeEnd = roundTime(timeEnd);
+			setDayName(timeEnd);
+		}else {
+			throw new IllegalArgumentException("Les deux attributs timeEnd et timeStart "
+					+ "doivent avoir la même date (jour)");
+		}
+		
+	}
+	
+	private void setDayName(LocalDateTime time) {
+		this.dayName = time.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRANCE);
 	}
 	/**
 	 * getter method to get the moment when the employee ends his day of work

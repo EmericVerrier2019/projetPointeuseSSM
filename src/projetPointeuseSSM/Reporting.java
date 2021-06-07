@@ -2,12 +2,11 @@ package projetPointeuseSSM;
 
 import java.io.Serializable;
 import java.time.Duration;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.HashMap;
+
+
 
 
 
@@ -20,7 +19,7 @@ public class Reporting implements Serializable {
 	
 	private Day currentDay; //jour actuel 
 	private Duration overTimeHour; //heure supplémentaire
-	private List<Day> workedDays; //liste des jours travaillés
+	private HashMap<Day,Duration> workedDays; //liste des jours travaillés
 	private Employee employee; //employé rattaché à ce reporting
 	
 	/**
@@ -29,7 +28,7 @@ public class Reporting implements Serializable {
 	 */
 	public Reporting(Employee employee) {
 		this.employee = employee;
-		workedDays = new ArrayList<>();
+		workedDays = new HashMap<Day,Duration>();
 		overTimeHour = Duration.ofHours(0);
 		currentDay = new Day();
 	}
@@ -54,7 +53,7 @@ public class Reporting implements Serializable {
 	 * Retourne la liste des jours travaillés
 	 * @return La liste des jours travaillé par l'employé
 	 */
-	public List<Day> getWorkedDays() {
+	public HashMap<Day, Duration> getWorkedDays() {
 		return workedDays;
 	}
 
@@ -74,7 +73,7 @@ public class Reporting implements Serializable {
 		
 		//si le jour en cour à déjà c'est heures de début et de fin initialisé, on créer un nouveau jour
 		if(currentDay.getTimeStart() != null && currentDay.getTimeEnd() != null) {
-			currentDay = new Day(null,null,dateFromClocking.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.FRANCE));
+			currentDay = new Day(null,null);
 		}
 		
 		//si l'heure de début n'est pas initialisé
@@ -83,20 +82,31 @@ public class Reporting implements Serializable {
 		}
 		//sinon on vient de finir la journée
 		else {
-			currentDay.setTimeEnd(dateFromClocking);
-			workedDays.add(currentDay);
-			//On regard par rapport au jour, si l'employé à réaliser des heures supplémentaires
-			Planning planning = employee.getPlanning();
-			for (Day day : planning.getDayList()) {
-				//S'il s'agit du même jour on récupère l'horaire prévu par le planning
-				if (currentDay.getDayName().compareToIgnoreCase(day.getDayName()) >= 0) {
-					//On fait la différence entre les heures réalisé et celles prévues par le planning
-					Duration overTimeWorkedCurrentDay = currentDay.getDailyWorkedHours().minus(day.getDailyWorkedHours());
-					overTimeHour.plus(overTimeWorkedCurrentDay);
-				}
-			}
-			
+		currentDay.setTimeEnd(dateFromClocking);
+		Duration overTimeCurrentDayHour = getOverTimeCurrentDayHour(currentDay); //heure supplémentaire réalisé dans le currentDay
+		workedDays.put(currentDay, overTimeCurrentDayHour);
+		overTimeHour = overTimeHour.plus(overTimeCurrentDayHour);
 		}
+			
+	}
+	
+	/**
+	 * Permet de calculer les heures supplémentaire du jour passé en paramètre
+	 * @return
+	 */
+	public Duration getOverTimeCurrentDayHour(Day day) {
+		//On regard par rapport au jour, si l'employé à réaliser des heures supplémentaires
+		Planning planning = employee.getPlanning();
+		for (Day dayPlanning : planning.getDayList()) {
+			//S'il s'agit du même jour on récupère l'horaire prévu par le planning
+			if (day.getDayName().compareToIgnoreCase(dayPlanning.getDayName()) == 0) {
+				//On fait la différence entre les heures réalisé et celles prévues par le planning
+				Duration overTimeWorkedCurrentDay = day.getDailyWorkedHours().minus(dayPlanning.getDailyWorkedHours());
+				return overTimeWorkedCurrentDay;
+			}
+		}
+		//si on sort de la boucle le nom du currentDay n'est pas bien définie
+		throw new IllegalAccessError("le nom du currentDay ne correspond pas avec ceux du planning");
 	}
 
 	@Override

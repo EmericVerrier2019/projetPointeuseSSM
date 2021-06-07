@@ -13,7 +13,7 @@ public class ManagementTableModel extends AbstractTableModel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Employee> employees;
-	private String[] header = {"id","prenom","nom","Présent sur site"} ;
+	private static final String[] header = {"id","prenom","nom","Présent sur site"} ;
 	
 	public ManagementTableModel() {
 		super();
@@ -30,10 +30,6 @@ public class ManagementTableModel extends AbstractTableModel{
 
 	public void setEmployees(ArrayList<Employee> employees) {
 		this.employees = employees;
-	}
-
-	public String[] getHeader() {
-		return header;
 	}
 
 	public int getRowCount() {

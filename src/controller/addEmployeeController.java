@@ -127,6 +127,7 @@ public class addEmployeeController implements ActionListener {
 			
 			Employee employee = new Employee(firstFieldName.getText(),lastFieldName.getText(),department.getDepartmentNumber(),Integer.parseInt(idField.getText()));
 			employee.setPlanning(planning);
+			employee.updateHoursToDo();
 			company.addEmployee(employee, department);
 			Main.mainFrame.updateEmployeeTable(company.getListEmployees());
 			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));

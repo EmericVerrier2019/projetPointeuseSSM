@@ -234,10 +234,7 @@ public class Employee implements Comparable<Employee> {
 			short codeError = 1;
 			throw new EventException(codeError,errorMessage);
 		}else {
-			Planning planning = getPlanning();
-			//For the developpment we use stub methods
-			planning.PlanningStub();
-			setHoursToDo(planning.getWeeklyWorkedHours());
+			setHoursToDo(getPlanning().getWeeklyWorkedHours());
 		}
 	}
 

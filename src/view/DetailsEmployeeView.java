@@ -108,7 +108,7 @@ public class DetailsEmployeeView extends JDialog {
 		String[] hours = new String[24];
 		for(int nLoop = 0; nLoop < 24; nLoop++) {
 			//on récupère l'heure sous forme string en utilisant les format de LocalTime
-			hours[nLoop] = LocalTime.of(nLoop,0).format(DateTimeFormatter.ofPattern("k"));
+			hours[nLoop] = Day.convertUnit(nLoop);
 		}
 		
 		//tableau de String contenant les minutes
@@ -234,9 +234,6 @@ public class DetailsEmployeeView extends JDialog {
 			JComboBox<String> minuteField = new JComboBox<String>(minutes);
 			hourField.setName("ComboBox hour"+format+days[i]);
 			minuteField.setName("ComboBox minute"+format+days[i]);
-			//On ajoute les components a la liste des commponent de la view
-			listComponentView.add(hourField);
-			listComponentView.add(minuteField);
 			//si on modifie l'employé on selectionne ses horaires
 			if(employeeIsModifiying()) {
 				Day currentDay = employee.getPlanning().getDayList().get(i);
@@ -245,15 +242,15 @@ public class DetailsEmployeeView extends JDialog {
 				switch (format) {
 					case "start":
 						numberHour = currentDay.getlDAYTimeStart().getHour();
-						hourField.setSelectedItem(Day.convertUnit(numberHour));
+						hourField.setSelectedIndex(numberHour);
 						numberMinute = currentDay.getlDAYTimeStart().getMinute();
-						minuteField.setSelectedItem(Day.convertUnit(numberMinute));
+						minuteField.setSelectedIndex((numberMinute/15)); //on divise par 15 pour récupérer l'indice dans la liste déroulante de valeur (00,15,30,45)
 						break;
 					case "end":
 						numberHour = currentDay.getlDAYTimeEnd().getHour();
-						hourField.setSelectedItem(Day.convertUnit(numberHour));
+						hourField.setSelectedIndex(numberHour);
 						numberMinute = currentDay.getlDAYTimeEnd().getMinute();
-						minuteField.setSelectedItem(Day.convertUnit(numberMinute));
+						minuteField.setSelectedIndex((numberMinute/15));
 						break;
 				}				
 			}//sinon on en prend par des valeurs par défaut
@@ -269,6 +266,9 @@ public class DetailsEmployeeView extends JDialog {
 					break;
 				}
 			}
+			//On ajoute les components a la liste des commponent de la view
+			listComponentView.add(hourField);
+			listComponentView.add(minuteField);
 			fieldsContainer.add(dayOfSchedule);
 			fieldsContainer.add(hourField);
 			fieldsContainer.add(minuteField);

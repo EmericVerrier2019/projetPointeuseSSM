@@ -15,6 +15,8 @@ import controller.DetailsEmployeeController;
 import controller.addEmployeeController;
 import projetPointeuseSSM.Company;
 import projetPointeuseSSM.Employee;
+import projetPointeuseSSM.TableModel.IsWorkingEmployeeCellRenderer;
+import projetPointeuseSSM.TableModel.ManagementTableModel;
 
 
 public class ManagementPanel extends JPanel{
@@ -42,6 +44,7 @@ public class ManagementPanel extends JPanel{
 		JTable tb = new JTable(tableModel);
 		tb.getTableHeader().setReorderingAllowed(false);
 		tb.setModel(tableModel);
+		tb.getColumnModel().getColumn(3).setCellRenderer(new IsWorkingEmployeeCellRenderer()); //on définie un rendu pour la dernière colonne
 		tb.addMouseListener(new DetailsEmployeeController(company));
 		
 		this.setLayout(new BorderLayout());

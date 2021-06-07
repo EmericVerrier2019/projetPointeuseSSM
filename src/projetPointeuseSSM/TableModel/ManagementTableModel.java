@@ -1,4 +1,4 @@
-package view;
+package projetPointeuseSSM.TableModel;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class ManagementTableModel extends AbstractTableModel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Employee> employees;
-	private String[] header = {"id","prenom","nom"} ;
+	private String[] header = {"id","prenom","nom","Présent sur site"} ;
 	
 	public ManagementTableModel() {
 		super();
@@ -57,21 +57,13 @@ public class ManagementTableModel extends AbstractTableModel{
 			return employees.get(rowIndex).getLastName();
 		case 2:
 			return employees.get(rowIndex).getFirstName();
+		case 3:
+			return employees.get(rowIndex).getIsWorking();
 		default:
 			return null;		
 		}
 	}
 	
-	public void addEmployee(Employee employee) {
-		employees.add(employee);
-		fireTableRowsInserted(employees.size() -1 ,employees.size() -1);
-	}
-	
-	public void removeEmployee(int rowIndex) {
-		employees.remove(rowIndex);
-		fireTableRowsDeleted(rowIndex, rowIndex);
-		
-	}
 
 	@Override
     public boolean isCellEditable(int row, int col) {

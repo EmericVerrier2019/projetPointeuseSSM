@@ -28,6 +28,8 @@ import javax.swing.border.EmptyBorder;
 import org.w3c.dom.events.EventException;
 
 import controller.addEmployeeController;
+import controller.deleteEmployeeController;
+import controller.modifyEmployeeController;
 import projetPointeuseSSM.Company;
 import projetPointeuseSSM.Day;
 import projetPointeuseSSM.Department;
@@ -174,7 +176,7 @@ public class DetailsEmployeeView extends JDialog {
 		
 		//On modifie l'action en fonction de si on ajout ou modifie un employé
 		if(employeeIsModifiying()) {
-			
+			validationButton.addActionListener(new modifyEmployeeController(this, company, employee, listComponentView));
 		}else {
 			validationButton.addActionListener(new addEmployeeController(this, company, listComponentView));
 		}
@@ -184,6 +186,7 @@ public class DetailsEmployeeView extends JDialog {
 		if(employeeIsModifiying()) {
 			fieldsContainer.add(createEntryFieldPanel("Heures supplémentaire : "+ (employee.getHoursWorked().minus(employee.getHoursToDo()).toHours())),BorderLayout.SOUTH);
 			JButton deleteButton = new JButton("Supprimer");
+			deleteButton.addActionListener(new deleteEmployeeController(this, company, employee));
 			allButtonsPannel.add(deleteButton);
 		}
 		else {

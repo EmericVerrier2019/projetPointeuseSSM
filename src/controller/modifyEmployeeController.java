@@ -1,12 +1,12 @@
 package controller;
 
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -18,9 +18,7 @@ import projetPointeuseSSM.Main;
 import projetPointeuseSSM.Planning;
 import view.DetailsEmployeeView;
 
-
-
-public class addEmployeeController implements ActionListener {
+public class modifyEmployeeController implements ActionListener {
 
 	/*
 	 * view qui est rattaché au controleur
@@ -32,25 +30,31 @@ public class addEmployeeController implements ActionListener {
 	 */
 	private Company company;
 	
+	/**
+	 * Employé à modifier
+	 */
+	private Employee employee;
 	/*
 	 * Liste des components rattachés à la vue et contenant les informations relatives à l'employé
 	 */
 	private ArrayList<Component> listComponentView;
-	
-	
+
 	/**
 	 * Contructeur qui initialise le controleur
 	 * @param view Vue rattaché au controleur
 	 * @param company Entreprise géré par l'application
+	 * @param employee L'employé à modifier
 	 * @param listComponentView Liste des components rattachés a la vue
 	 */
-	public addEmployeeController(DetailsEmployeeView view, Company company, ArrayList<Component> listComponentView) {
+	public modifyEmployeeController(DetailsEmployeeView view, Company company, Employee employee,
+			ArrayList<Component> listComponentView) {
 		super();
 		this.view = view;
 		this.company = company;
+		this.employee = employee;
 		this.listComponentView = listComponentView;
 	}
-
+	
 	/**
 	 * Permet de créer une heure de type LocalTime en utilisant deux JComboBox
 	 * @param hourCombo Liste déroulante contenant l'heure
@@ -62,7 +66,6 @@ public class addEmployeeController implements ActionListener {
 		int numberMinutes = Integer.parseInt((String) minutesCombo.getSelectedItem());
 		return LocalTime.of(numberHour,numberMinutes);
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -105,11 +108,7 @@ public class addEmployeeController implements ActionListener {
 				}
 				
 			}
-			
-			
-			
-			//creation du planning
-			
+			//creation du planning		
 			Planning planning = new Planning();
 			planning.PlanningStub();//On modifie juste les horaires des jours
 			
@@ -123,18 +122,17 @@ public class addEmployeeController implements ActionListener {
 				planning.getDayList().get(i/2).setlDAYTimeEnd(enddingHour);
 			}
 			
-			
-			
-			Employee employee = new Employee(firstFieldName.getText(),lastFieldName.getText(),department.getDepartmentNumber(),Integer.parseInt(idField.getText()));
+			employee.setFirstNameEmployee(firstFieldName.getText());
+			employee.setLastNameEmployee(lastFieldName.getText());
+			employee.setIdEmployee(Integer.parseInt(idField.getText()));
+			employee.setIdDepartment(department.getDepartmentNumber());
 			employee.setPlanning(planning);
-			employee.updateHoursToDo();
-			company.addEmployee(employee, department);
+			employee.updateHoursToDo();//on recalcul les heures à faire
 			Main.mainFrame.updateEmployeeTable(company.getListEmployees());
 			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 		} catch(Exception ex) {
 			JOptionPane.showMessageDialog(view,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);
 		}
-		
-	}
-	
+				
+	}	
 }

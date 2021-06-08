@@ -64,6 +64,12 @@ public class MainFrame extends JFrame{
 	}
 	
 	public void updateEmployeeTable(ArrayList<Employee> listEmployee) {
-		gestionManagementPanel.updateEmployeeTableModel(listEmployee); ;
+		gestionManagementPanel.updateEmployeeTableModel(listEmployee); 
+		//On mets a jour la table des historiques pour prendre en compte le cas où on supprime un employé
+		historyPanel.updateReportingTable();;
+	}
+	
+	public void updateReportingTable() {
+		historyPanel.updateReportingTable();
 	}
 }

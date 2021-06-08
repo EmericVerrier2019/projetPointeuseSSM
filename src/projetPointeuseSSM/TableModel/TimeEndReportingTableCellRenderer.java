@@ -33,8 +33,9 @@ public class TimeEndReportingTableCellRenderer extends DefaultTableCellRenderer{
 		    	setBackground(Color.orange);
 		    }
 		    else {
-		    	setText(timeEnd.toLocalTime().format(DateTimeFormatter.ofPattern("EEEE dd MMMM YYYY : h'h'mm",Locale.FRANCE)));
-		    	setForeground(Color.green);
+		    	setText(timeEnd.format(DateTimeFormatter.ofPattern("EEEE dd MMMM YYYY : HH'h'mm",Locale.FRANCE)));
+		    	setForeground(Color.blue);
+		    	setBackground(Color.white);
 		    }        
         }
         if (column == 4) {
@@ -45,14 +46,12 @@ public class TimeEndReportingTableCellRenderer extends DefaultTableCellRenderer{
         	else if(overTimeHour.toHours() < 0) {
         		setText(Long.toString(overTimeHour.toHours()));
         		setForeground(Color.red);
-        	}
-        	else if( overTimeHour.toHours() == 0) {
-        		setText(Long.toString(overTimeHour.toHours()));
-        		setForeground(Color.blue);
+        		setBackground(Color.white);
         	}
         	else {
         		setText(Long.toString(overTimeHour.toHours()));
-        		setForeground(Color.green);
+        		setForeground(Color.blue);
+        		setBackground(Color.white);
         	}
         }
         

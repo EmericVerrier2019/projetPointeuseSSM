@@ -2,10 +2,13 @@ package view;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 
+import controller.FilterReportingController;
 import projetPointeuseSSM.Company;
 import projetPointeuseSSM.TableModel.IsWorkingEmployeeCellRenderer;
 import projetPointeuseSSM.TableModel.ManagementTableModel;
@@ -23,6 +26,8 @@ public class ReportingPanel extends JPanel{
 	
 	private Company company;
 	
+	public static final String[] FILTER_COMBO_BOX = new String[] {"Aujourd'hui","Tous les jours"};
+	
 	public ReportingPanel(Company company) {
 		super();
 		setName("Historique");
@@ -32,6 +37,17 @@ public class ReportingPanel extends JPanel{
 	}
 	
 	private void IHMSetUp() {
+		
+		//creation du choix entre tous les pointages et ceux d'aujourd'hui
+		
+		JPanel choiceDisplayHistoryPanel = new JPanel();
+		choiceDisplayHistoryPanel.setLayout(new BorderLayout());
+		
+		JComboBox<String> choiceFilterDisplay = new JComboBox<String>(FILTER_COMBO_BOX);
+		choiceFilterDisplay.addItemListener(new FilterReportingController(tableModel));
+		choiceDisplayHistoryPanel.add(choiceFilterDisplay,BorderLayout.WEST);
+		//création de la table des historiques
+		
 		JTable tb = new JTable(tableModel);
 		tb.getTableHeader().setReorderingAllowed(false);
 		tb.setModel(tableModel);
@@ -39,5 +55,10 @@ public class ReportingPanel extends JPanel{
 		tb.getColumnModel().getColumn(4).setCellRenderer(new TimeEndReportingTableCellRenderer());
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(tb),BorderLayout.CENTER);
+		this.add(choiceDisplayHistoryPanel,BorderLayout.NORTH);
+	}
+	
+	public void updateReportingTable() {
+		tableModel.fireTableDataChanged();
 	}
 }

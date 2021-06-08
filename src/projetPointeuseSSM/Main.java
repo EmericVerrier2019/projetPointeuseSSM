@@ -58,15 +58,19 @@ public class Main {
 		test.setPlanning(pla);
 		Reporting report = new Reporting(test);
 		LocalDateTime date1 = LocalDateTime.of(LocalDate.now(),LocalTime.of(8, 0));
-		LocalDateTime date2 = date1.plusHours(7);
+		LocalDateTime date2 = date1.plusHours(9);
 		LocalDateTime date3 = date1.plusDays(1);
 		LocalDateTime date4 = date3.plusHours(5);
 		LocalDateTime date5 = date3.plusDays(1);
+		LocalDateTime date6 = date5.plusHours(10);
+		LocalDateTime date7 = date5.plusDays(1);
 		report.updateReporting(date1);
 		report.updateReporting(date2);
 		report.updateReporting(date3);
 		report.updateReporting(date4);
 		report.updateReporting(date5);
+		report.updateReporting(date6);
+		report.updateReporting(date7);
 		test.setReportingOfDayWorked(report);
 		Main.company.addEmployee(test, dep);
 	}

@@ -11,15 +11,10 @@ import javax.swing.JTabbedPane;
 import projetPointeuseSSM.Company;
 import projetPointeuseSSM.Employee;
 
-
-
-
-
 public class MainFrame extends JFrame{
 	
 	private ManagementPanel gestionManagementPanel;
 	private ReportingPanel historyPanel;
-	private TicketPanel ticketPanel; 
 	private JTabbedPane menuTab;
 	private Company company;
 	
@@ -37,22 +32,15 @@ public class MainFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Set the default closing of frame when we click on the red cross
 		menuTab = new JTabbedPane();
 		gestionManagementPanel = new ManagementPanel(this.company);
-		ticketPanel = new TicketPanel();
 		historyPanel = new ReportingPanel(this.company);
 		menuTab.add(gestionManagementPanel);
-		menuTab.add(historyPanel);
-		menuTab.add(ticketPanel);
-		
+		menuTab.add(historyPanel);		
 		
 		this.setContentPane(menuTab);
 	}
 
 	public ManagementPanel getGestionManagementPanel() {
 		return gestionManagementPanel;
-	}
-
-	public TicketPanel getTicketPanel() {
-		return ticketPanel;
 	}
 
 	public JTabbedPane getMenuTab() {
@@ -65,7 +53,7 @@ public class MainFrame extends JFrame{
 	
 	public void updateEmployeeTable(ArrayList<Employee> listEmployee) {
 		gestionManagementPanel.updateEmployeeTableModel(listEmployee); 
-		//On mets a jour la table des historiques pour prendre en compte le cas où on supprime un employé
+		//On mets a jour la table des historiques pour prendre en compte le cas oï¿½ on supprime un employï¿½
 		historyPanel.updateReportingTable();;
 	}
 	

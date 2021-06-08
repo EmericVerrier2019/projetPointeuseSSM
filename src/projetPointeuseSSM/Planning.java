@@ -1,13 +1,14 @@
 package projetPointeuseSSM;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
  * class Planning is designed to represent a week of labor of an employee.
  * It's basically a set of Day elements, which is accessible by specific getter and setter
- * @author Emeric Verrier
  *  
  */
 public class Planning {
@@ -27,11 +28,11 @@ public class Planning {
 	public void PlanningStub() 
 	{
 		dayList = new ArrayList<Day>();
-		Day monday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"monday");
-		Day tuesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"tuesday");
-		Day wednesday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"wednesday");
-		Day thursday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"thursday");
-		Day friday = new Day(LocalTime.of(8, 0, 0),LocalTime.of(17, 0, 0),"friday");
+		Day monday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Lundi");
+		Day tuesday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Mardi");
+		Day wednesday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Mercredi");
+		Day thursday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Jeudi");
+		Day friday = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Vendredi");
 		
 		dayList.add(monday);
 		dayList.add(tuesday);

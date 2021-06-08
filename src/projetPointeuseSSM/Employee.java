@@ -20,18 +20,15 @@
 package projetPointeuseSSM;
 
 
-import java.time.*;
 
-public class Employee {
+public class Employee implements Comparable<Employee> {
 
 	private int idEmployee;
 	private String lastNameEmployee;
 	private String firstNameEmployee;
 	private int idDepartment;
 	private Planning planningEmployee;
-	private LocalTime hoursTheory;
-	private LocalTime hoursDo;
-	private boolean isWorking; //this boolean mean the employee is present at work
+	private Reporting reportingOfDayWorked;
 	
 	/***********************/
 	/***** Constructor *****/
@@ -41,8 +38,7 @@ public class Employee {
 	 * Default constructor, which create Employee
 	 */
 	public Employee(){
-		setHoursDo(LocalTime.of(0, 0, 0));
-		setHoursTheory(LocalTime.of(0, 0, 0));
+		reportingOfDayWorked = new Reporting(this);
 	}
 	
 	/**
@@ -55,8 +51,7 @@ public class Employee {
 		setLastNameEmployee(lastName);
 		setIdDepartment(idDepartment);
 		setIdEmployee(idEmployee);
-		setHoursDo(LocalTime.of(0, 0, 0));
-		setHoursTheory(LocalTime.of(0, 0, 0));
+		reportingOfDayWorked = new Reporting(this);
 	}
 	
 	/**
@@ -67,8 +62,8 @@ public class Employee {
 	public Employee(int idDepartment, int idEmployee) {
 		setIdDepartment(idDepartment);
 		setIdEmployee(idEmployee);
-		setHoursDo(LocalTime.of(0, 0, 0));
-		setHoursTheory(LocalTime.of(0, 0, 0));
+		reportingOfDayWorked = new Reporting(this);
+		
 	}
 	
 	/******************/
@@ -118,34 +113,18 @@ public class Employee {
 	}
 	
 	/**
-	 * Update the attribute hoursTheory
-	 * @param LocalTime newHour, the new employee's number of theoretical hours that we want to set
+	 * permet de modifié le reporting des jours travaillés
+	 * @param reportingOfDayWorked un objet de la classe Reporting
 	 */
-	public void setHoursTheory(LocalTime newHour) {
-		this.hoursTheory = newHour;
-	}
-	
-	/**
-	 * Update the attribute hoursDo
-	 * @param LocalTime newHour, the new employee's number of hours completed that we want to set
-	 * 
-	 */
-	public void setHoursDo(LocalTime newHour) {
-		this.hoursDo = newHour;
-	}
-	
-	/**
-	 * Update the attribute isWorking
-	 * @param boolean isWorking, we want to set if the employee is present at work
-	 */
-	public void setIsWorking(boolean isWorking) {
-		this.isWorking = isWorking;
+	public void setReportingOfDayWorked(Reporting reportingOfDayWorked) {
+		this.reportingOfDayWorked = reportingOfDayWorked;
 	}
 	
 	/******************/
 	/***** Getter *****/
 	/******************/
 	
+
 	/**
 	 * Return the attribute idEmployee
 	 * @return int idEmployee
@@ -187,49 +166,28 @@ public class Employee {
 	}
 	
 	/**
-	 * Return the attribute hoursTheory
-	 * @return LocalTime hoursTheory;
+	 * Renvoi le reporting rattaché à l'employé
+	 * @return reporting de l'employé
 	 */
-	public LocalTime getHoursTheory() {
-		return this.hoursTheory;
+	public Reporting getReportingOfDayWorked() {
+		return reportingOfDayWorked;
 	}
-	
-	/**
-	 * Return the attribute hoursDo
-	 * @return LocalTime hoursDo
-	 */
-	public LocalTime getHoursDo() {
-		return this.hoursDo;
-	}
-	
-	/**
-	 * Return the attribute isWorking
-	 * @return boolean isWorking
-	 */
-	public boolean getIsWorking() {
-		return this.isWorking;
-	}
-	
+
 	/*******************/
 	/***** Methods *****/
 	/*******************/
 	
-	
-	public void addHourDo(LocalTime hour) {
-		int numberHours = hour.getHour();
-		int numberMinutes = hour.getMinute();
-		int numberSecondes = hour.getSecond();
-		setHoursDo(this.hoursDo.plusHours(numberHours).plusMinutes(numberMinutes).plusSeconds(numberSecondes));
-	}
-	
+	@Override
 	public String toString() {
-		return "Employé avec l'identifiant: "+getIdEmployee()+System.lineSeparator()+
-				"Nom: "+getLastName()+" Prenom: "+getFirstName()+System.lineSeparator()+
-				"Identifiant de son departement: "+getIdDepartment()+System.lineSeparator()+
-				"Heures que l'employé doit faire: "+getHoursTheory()+System.lineSeparator()+
-				"Heures que l'employé a réalisé: "+getHoursDo()+System.lineSeparator()+
-				"L'employé est présent sur le lieu de travail: "+getIsWorking();
+		return "Employee [idEmployee=" + idEmployee + ", lastNameEmployee=" + lastNameEmployee + ", firstNameEmployee="
+				+ firstNameEmployee + ", idDepartment=" + idDepartment + ", planningEmployee=" + planningEmployee
+				+ ", reportingOfDayWorked=" + reportingOfDayWorked + "]";
 	}
-	
-	
+
+	@Override
+	public int compareTo(Employee o) {
+		
+		return this.idEmployee - o.idEmployee;
+	}
+
 }

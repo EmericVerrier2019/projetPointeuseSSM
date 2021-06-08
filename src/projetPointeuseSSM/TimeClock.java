@@ -99,6 +99,8 @@ public class TimeClock {
 		}
 	}
 
+	private int TCPort;
+	
 	/*****************
 	 * Constructors
 	 ****************/
@@ -116,6 +118,7 @@ public class TimeClock {
 			System.out.println(e.getMessage());
 		}
 
+		TCPort = 80;
 	}
 	public TimeClock(int ArgPort, byte[] ipAddr) {
 		PTSNombreEmployeeWork = 0;

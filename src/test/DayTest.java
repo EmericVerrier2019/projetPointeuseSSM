@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.junit.After;
@@ -19,7 +21,7 @@ public class DayTest {
 	@BeforeClass
 	public static void ShowBeforeRunTestClass()
 	{
-		 testDay = new Day(LocalTime.of(8, 0),LocalTime.of(15, 0),"monday");
+		 testDay = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 0)),LocalDateTime.of(LocalDate.now(), LocalTime.of(15, 0)),"monday");
 		System.out.println("Start tests in DayTest");
 	}
 	
@@ -40,12 +42,14 @@ public class DayTest {
 	public void testGetsDAYdayName() 
 	{
 		
-		assertEquals("monday", this.testDay.getsDAYdayName());
+		assertEquals("monday", this.testDay.getDayName());
 	}
 	@Test
 	public void testGetsDailyWorkedHours() 
 	{
 		assertEquals(this.testDay.getDailyWorkedHours().compareTo(Duration.ofHours(7)),0);
+		Day testDay = new Day(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)),LocalDateTime.of(LocalDate.now(),LocalTime.of(17, 0)),"Lundi");
+		assertEquals("Lundi", testDay.getDayName());
 	}
 
 }

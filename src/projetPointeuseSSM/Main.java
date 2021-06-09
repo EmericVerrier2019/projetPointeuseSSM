@@ -88,7 +88,7 @@ public class Main {
 		LocalDateTime date4 = date3.plusHours(5);
 		LocalDateTime date5 = date3.plusDays(1);
 		LocalDateTime date6 = date5.plusHours(10);
-		LocalDateTime date7 = date5.plusDays(1);
+		LocalDateTime date7 = LocalDateTime.now();
 		report.updateReporting(date1);
 		report.updateReporting(date2);
 		report.updateReporting(date3);

@@ -56,6 +56,9 @@ public class TicketReceiver extends Thread
 							Ticket receivedTicket = (Ticket) objectInputStream.readObject();
 							System.out.println(receivedTicket);
 							ticketStorage.add(receivedTicket);
+							addPointingEmployee(receivedTicket);
+							Main.mainFrame.updateEmployeeTable(Main.company.getListEmployees());
+							
 						}
 				} 
 				catch (ClassNotFoundException e) 
@@ -67,4 +70,15 @@ public class TicketReceiver extends Thread
 				e.printStackTrace();
 			}
 	}	
+	
+	private void addPointingEmployee(Ticket receiveTicket) {
+		int indiceEmployee = Main.company.existEmployee(receiveTicket.getIdEmployee());
+		//The employee exist in the company
+		if( indiceEmployee >= 0) {
+			Employee employee = Main.company.getListEmployees().get(indiceEmployee);
+			employee.getReportingOfDayWorked().updateReporting(receiveTicket.getTicketDateTime());
+		}else {
+			System.out.println("employé n'est pas défini");
+		}
+	}
 }

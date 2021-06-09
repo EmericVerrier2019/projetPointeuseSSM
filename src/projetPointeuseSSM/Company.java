@@ -124,6 +124,20 @@ public class Company {
 		}
 	}
 		
+	/**
+	 * Permet de savoir si un employé existe et est présent dans l'entreprise
+	 * @param idEmployee l'identifiant de l'employé 
+	 * @return return l'indice de l'employé s'il existe, sinon on retourne -1
+	 */
+	public int existEmployee(int idEmployee) {
+	
+		for (int i = 0; i < listEmployees.size(); i++) {
+			if (listEmployees.get(i).getIdEmployee() == idEmployee) {
+				return i;
+			}
+		}
+		return -1;
+	}
 	
 	
 	

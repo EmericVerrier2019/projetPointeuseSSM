@@ -54,14 +54,18 @@ public class ManagementTableModel extends AbstractTableModel{
 		case 2:
 			return employees.get(rowIndex).getFirstName();
 		case 3:
-			if ( (employees.get(rowIndex).getReportingOfDayWorked().getCurrentDay() == null) 
-					|| (employees.get(rowIndex).getReportingOfDayWorked().getCurrentDay().getTimeEnd() != null) ){
-				return false;			
+			if (employees.get(rowIndex).getReportingOfDayWorked().getCurrentDay() == null){
+				return -1;			
+			}else if(employees.get(rowIndex).getReportingOfDayWorked().getCurrentDay().getTimeEnd() == null 
+					&& employees.get(rowIndex).getReportingOfDayWorked().getCurrentDay().getTimeStart() == null){
+				return -1;
+			}else if(employees.get(rowIndex).getReportingOfDayWorked().getCurrentDay().getTimeEnd() == null){
+				return 1;
 			}else {
-				return true;
+				return -1;
 			}
-		default:
-			return null;		
+		default :
+			return null;
 		}
 	}
 	

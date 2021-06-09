@@ -21,8 +21,8 @@ public class IsWorkingEmployeeCellRenderer extends DefaultTableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         
-        boolean isWorking = (boolean) value;
-        if (isWorking) {
+        int isWorking = (int) value;
+        if (isWorking > 0) {
         	setText("travail");
         	setForeground(Color.green);
         }

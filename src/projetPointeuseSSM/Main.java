@@ -39,6 +39,7 @@ public class Main {
 					MainFrameController controller = new MainFrameController(company);
 					controller.setMainFrame(new MainFrame(company));
 					controller.getMainFrame().setVisible(true);
+					mainFrame = controller.getMainFrame();
 					
 				}
 			});

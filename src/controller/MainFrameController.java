@@ -23,13 +23,11 @@ public class MainFrameController{
 
 	private Company company ;
 	private ArrayList<Ticket> ticketList;
-	private ArrayList<Employee> employeeList;
 	private MainFrame mainFrame;
 	public MainFrameController(Company company)
 	{
 		this.company = company;
 		ticketList = new ArrayList<Ticket>();
-		employeeList = new ArrayList<Employee>();
 		setMainFrame(new MainFrame(company));
 		
 		
@@ -45,7 +43,6 @@ public class MainFrameController{
 				try {
 					FileInputStream readSavedEmployeeFile = new FileInputStream("employeeList.ser");
 					ObjectInputStream readSavedEmployeeInputStream = new ObjectInputStream(readSavedEmployeeFile);
-					MainFrameController.this.employeeList = (ArrayList<Employee>) readSavedEmployeeInputStream.readObject();
 					readSavedEmployeeInputStream.close();
 					readSavedEmployeeFile.close();
 					
@@ -54,8 +51,6 @@ public class MainFrameController{
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				}
 				TicketReceiver receiver = new TicketReceiver(new InetSocketAddress(3125));
@@ -71,7 +66,6 @@ public class MainFrameController{
 					
 					FileOutputStream saveEmployeeListFile = new FileOutputStream("employeeList.ser");
 					ObjectOutputStream saveEmployeeOutputStream = new ObjectOutputStream(saveEmployeeListFile);
-					saveEmployeeOutputStream.writeObject(employeeList);
 					saveEmployeeOutputStream.close();
 					saveEmployeeListFile.close();
 					

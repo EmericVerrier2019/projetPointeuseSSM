@@ -1,5 +1,6 @@
 package projetPointeuseSSM;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.*;
 
 import java.time.chrono.ChronoLocalDate;
@@ -15,6 +16,8 @@ import java.util.Locale;
 
 import javax.swing.SwingUtilities;
 
+import com.sun.jdi.event.MonitorWaitedEvent;
+
 import view.timeClockView.*;
 import controller.MainFrameController;
 import view.MainFrame;
@@ -27,28 +30,41 @@ public class Main {
 	public static void main(String[] args)
 	{
 	
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
-				//On crï¿½e une nouvelle instance de notre JDialog
+		try {
+			SwingUtilities.invokeAndWait(new Runnable(){
+				public void run(){
+					//On crée une nouvelle instance de notre JDialog
+
+					mainStub();
+					MainFrameController controller = new MainFrameController(company);
+					controller.setMainFrame(new MainFrame(company));
+					controller.getMainFrame().setVisible(true);
+					
+				}
+			});
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		SwingUtilities.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
 				TimeClockFrame fenetrePointeuse = new TimeClockFrame();
 				fenetrePointeuse.setVisible(true);
-				
-				mainStub();
-				Main.mainFrame = new MainFrame(company);
-				Main.mainFrame.setVisible(true);
-				MainFrameController controllerMainFrame = new MainFrameController(company);
-				
-				
 			}
 		});
-
 	}
 
 	/**
-	 * @brief fonction qui instancie une entreprise a partir de rien
+	 * @brief fonction qui instancie une entreprise à partir de rien
 	 */
 	public static void mainStub() {
-		//On crï¿½e une nouvelle instance de notre JDialog
+		//On crée une nouvelle instance de notre JDialog
 		Main.company = new Company("Company");
 		Department dep =  new Department();
 		Department dep1 =  new Department();

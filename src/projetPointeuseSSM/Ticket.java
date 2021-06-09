@@ -1,5 +1,6 @@
 package projetPointeuseSSM;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -8,8 +9,9 @@ import java.time.LocalDateTime;
  * the two attributes in are the dateTime when the employee executes the act to point and the employee's id
  *
  */
-public class Ticket {
+public class Ticket implements Serializable{
 
+	private static final long serialVersionUID = 4200085030654389537L;
 	private LocalDateTime ticketDateTime;
 	private int idEmployee;
 	
@@ -50,5 +52,9 @@ public class Ticket {
 	 */
 	public void setIdEmployee(int idEmployee) {
 		this.idEmployee = idEmployee;
+	}
+	public String toString() 
+	{
+		return("identifiant employé : "+ this.idEmployee + " heure de pointage : " + this.ticketDateTime.toString());
 	}
 }

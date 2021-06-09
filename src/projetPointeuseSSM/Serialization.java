@@ -129,11 +129,11 @@ public class Serialization {
 	 * @return a timeclock 
 	 * @throws IOException
 	 */
-	public static TimeClock readClocking(InputStream input) throws IOException {
-		TimeClock timeClock = null;
+	public static TimeClockController readClocking(InputStream input) throws IOException {
+		TimeClockController timeClock = null;
 		ObjectInputStream objInput = new ObjectInputStream(input);
 		try {
-			timeClock = (TimeClock) objInput.readObject();
+			timeClock = (TimeClockController) objInput.readObject();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Objet non trouve dans le fichier");
 		}
@@ -146,7 +146,7 @@ public class Serialization {
 	 * @param clocking
 	 * @throws IOException
 	 */
-	public static void writeClocking(OutputStream output, TimeClock timeClock) throws IOException {
+	public static void writeClocking(OutputStream output, TimeClockController timeClock) throws IOException {
 		ObjectOutputStream objOutput = new ObjectOutputStream(output);
 		//ecrit dans le fichier une donnee de la pointeuse
 		objOutput.writeObject(timeClock);

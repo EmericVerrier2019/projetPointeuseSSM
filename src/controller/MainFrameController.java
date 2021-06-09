@@ -10,37 +10,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 
 import projetPointeuseSSM.Company;
 import projetPointeuseSSM.Employee;
 import projetPointeuseSSM.Ticket;
+import projetPointeuseSSM.TicketReceiver;
 import view.MainFrame;
 
 public class MainFrameController{
 
 	private Company company ;
-	private ArrayList<Ticket> entryTicketList;
-	private ArrayList<Ticket> exitTicketList;
+	private ArrayList<Ticket> ticketList;
 	private ArrayList<Employee> employeeList;
 	private MainFrame mainFrame;
 	public MainFrameController(Company company)
 	{
 		this.company = company;
-		entryTicketList = new ArrayList<Ticket>();
-		exitTicketList = new ArrayList<Ticket>();
+		ticketList = new ArrayList<Ticket>();
 		employeeList = new ArrayList<Employee>();
 		setMainFrame(new MainFrame(company));
 		
 		
-	}
-	public ArrayList<Ticket> getEntryTicketList()
-	{
-		return this.entryTicketList;
-	}
-	public ArrayList<Ticket> getExitTicketList()
-	{
-		return this.exitTicketList;
 	}
 	public void setMainFrame(MainFrame mainFrame) 
 	{
@@ -57,17 +49,8 @@ public class MainFrameController{
 					readSavedEmployeeInputStream.close();
 					readSavedEmployeeFile.close();
 					
-					FileInputStream readSavedEntryTicketListFile = new FileInputStream("entryTicketList.ser");
-					ObjectInputStream readSavedEntryTicketInputStream = new ObjectInputStream(readSavedEntryTicketListFile);
-					MainFrameController.this.entryTicketList = (ArrayList<Ticket>) readSavedEntryTicketInputStream.readObject();
-					readSavedEntryTicketInputStream.close();
-					readSavedEntryTicketListFile.close();
 					
-					FileInputStream readSavedExitTicketListFile = new FileInputStream("exitTicketList.ser");
-					ObjectInputStream readSavedExitTicketInputStream = new ObjectInputStream(readSavedExitTicketListFile);
-					MainFrameController.this.exitTicketList = (ArrayList<Ticket>) readSavedExitTicketInputStream.readObject();
-					readSavedExitTicketInputStream.close();
-					readSavedExitTicketListFile.close();
+
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
@@ -75,6 +58,9 @@ public class MainFrameController{
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				}
+				TicketReceiver receiver = new TicketReceiver(new InetSocketAddress(3125));
+				receiver.setTicketStorage(ticketList);
+				receiver.start();
 			}
 		});
 		this.mainFrame.addWindowListener(new WindowAdapter() {
@@ -82,18 +68,6 @@ public class MainFrameController{
 			public void windowClosing(WindowEvent e) 
 			{
 				try {
-					
-					FileOutputStream saveEntryTicketListFile = new FileOutputStream("entryTicketList.ser");
-					ObjectOutputStream saveEntryTicketOutputStream = new ObjectOutputStream(saveEntryTicketListFile);
-					saveEntryTicketOutputStream.writeObject(entryTicketList);
-					saveEntryTicketOutputStream.close();
-					saveEntryTicketListFile.close();
-					
-					FileOutputStream saveExitTicketListFile = new FileOutputStream("exitTicketList.ser");
-					ObjectOutputStream saveExitTicketOutputStream = new ObjectOutputStream(saveExitTicketListFile);
-					saveExitTicketOutputStream.writeObject(exitTicketList);
-					saveExitTicketOutputStream.close();
-					saveExitTicketListFile.close();
 					
 					FileOutputStream saveEmployeeListFile = new FileOutputStream("employeeList.ser");
 					ObjectOutputStream saveEmployeeOutputStream = new ObjectOutputStream(saveEmployeeListFile);
@@ -110,6 +84,10 @@ public class MainFrameController{
 			}			
 			
 		});
+	}
+	public MainFrame getMainFrame() 
+	{
+		return this.mainFrame;
 	}
 
 	

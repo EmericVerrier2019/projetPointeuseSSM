@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-import projetPointeuseSSM.TimeClock;
-import projetPointeuseSSM.TimeClock.ActionListenerParametersButton;
+import projetPointeuseSSM.TimeClockController;
+import projetPointeuseSSM.TimeClockController.ActionListenerParametersButton;
 
 public final class JPanelParametersView extends JPanel
 {
@@ -26,7 +26,7 @@ public final class JPanelParametersView extends JPanel
 		portField = new JTextField(5);
 		parametersButton = new JButton("Save Parameters");
 		
-		parametersButton.addActionListener(new TimeClock.ActionListenerParametersButton());
+		parametersButton.addActionListener(new TimeClockController().getParametersButtonManager());
 		ipLabel.setLabelFor(ipField);
 		portLabel.setLabelFor(portField);
 		ipLabel.setDisplayedMnemonic('I');

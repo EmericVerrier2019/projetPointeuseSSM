@@ -11,7 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import projetPointeuseSSM.TimeClock;
+import projetPointeuseSSM.Day;
+import projetPointeuseSSM.TimeClockController;
 
 public final class JPanelTimeClockView extends JPanel {
 	private JTextField userIdField;
@@ -27,7 +28,7 @@ public final class JPanelTimeClockView extends JPanel {
 		@Override
 		public void run() {
 			JPanelTimeClockView.this.dateElem =  "<html>" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd EEEE kk:mm:ss")).toString();
-			dateElem = dateElem +  ("<br>" + " Okay let's say : " +TimeClock.RoundTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)).toString());
+			dateElem = dateElem +  ("<br>" + " Okay let's say : " +Day.roundTime(LocalDateTime.now()).format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)).toString());
 			textDate.setText(dateElem);
 		}
 		
@@ -41,13 +42,13 @@ public final class JPanelTimeClockView extends JPanel {
 		userIdLabel = new JLabel("User Id :");
 		checkInButton = new JButton("Check In/Out");
 		this. dateElem = "<html>" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd EEEE kk:mm:ss")).toString();
-		this.dateElem = dateElem + ("<br>" + " Okay let's say : " +TimeClock.RoundTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)).toString());
+		this.dateElem = dateElem + ("<br>" + " Okay let's say : " +Day.roundTime(LocalDateTime.now()).format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)).toString());
 		textDate = new JLabel(dateElem);
 
 		userIdField.setEditable(true);
 		userIdLabel.setLabelFor(userIdField);
 		userIdLabel.setDisplayedMnemonic('i');
-		checkInButton.addActionListener(new TimeClock.ActionListenerTimeClockCheckInButton());
+		checkInButton.addActionListener(new TimeClockController().getTimeClockButtonManager());
 		timerUpdateDisplayedHeure.schedule(new timerTaskUpdateHour(),0,1000);
 		this.add(textDate);
 		this.add(userIdLabel);

@@ -13,7 +13,7 @@ import javax.swing.table.TableModel;
 import projetPointeuseSSM.Department;
 import projetPointeuseSSM.Employee;
 import projetPointeuseSSM.Planning;
-import projetPointeuseSSM.TimeClock;
+import projetPointeuseSSM.TimeClockController;
 
 public class TimeClockFrame extends JFrame{
 

@@ -130,7 +130,7 @@ public class addEmployeeController implements ActionListener {
 			Employee employee = new Employee(firstFieldName.getText(),lastFieldName.getText(),department.getDepartmentNumber(),Integer.parseInt(idField.getText()));
 			employee.setPlanning(planning);
 			company.addEmployee(employee, department);
-			Main.mainFrame.updateEmployeeTable(company.getListEmployees());
+			Main.mainFrame.updateEmployeeTable();
 			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 		} catch(Exception ex) {
 			JOptionPane.showMessageDialog(view,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);

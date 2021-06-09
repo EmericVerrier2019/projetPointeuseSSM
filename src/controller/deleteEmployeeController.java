@@ -49,7 +49,7 @@ public class deleteEmployeeController implements ActionListener {
 		String message = "Voulez-vous supprimer l'employé "+ employee.getFirstName() + " "+ employee.getLastName() + "?";
 		if (JOptionPane.showConfirmDialog(view,message, "Demande de confirmation",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
 			company.removeEmployee(employee);
-			Main.mainFrame.updateEmployeeTable(company.getListEmployees());
+			Main.mainFrame.updateEmployeeTable();
 			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 		};
 	}

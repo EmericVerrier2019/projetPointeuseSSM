@@ -7,7 +7,7 @@ import java.util.Collections;
 public class Company {
 
 	private String nom;
-	private List<Department> listDepartments;
+	private ArrayList<Department> listDepartments;
 	private ArrayList<Employee> listEmployees;
 	
 	/***********************/
@@ -20,7 +20,7 @@ public class Company {
 		this.listDepartments = new ArrayList<Department>();
 		this.listEmployees = new ArrayList<Employee>();
 	}
-	public Company(String argNom, List<Department> argListD, ArrayList<Employee> argListE) {
+	public Company(String argNom, ArrayList<Department> argListD, ArrayList<Employee> argListE) {
 		this.nom = argNom;
 		this.listDepartments = argListD;
 		this.listEmployees = argListE;
@@ -36,7 +36,7 @@ public class Company {
 	public ArrayList<Employee> getListEmployees() {
 		return listEmployees;
 	}
-	public List<Department> getListDepartment() {
+	public ArrayList<Department> getListDepartment() {
 		return listDepartments;
 	}
 	
@@ -47,7 +47,7 @@ public class Company {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public void setListDeprtment(List<Department> listDepartment) {
+	public void setListDeprtment(ArrayList<Department> listDepartment) {
 		this.listDepartments = listDepartment;
 	}
 	
@@ -133,6 +133,21 @@ public class Company {
 	
 		for (int i = 0; i < listEmployees.size(); i++) {
 			if (listEmployees.get(i).getIdEmployee() == idEmployee) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * Permet de savoir si un département existe et est présent dans l'entreprise
+	 * @param idDepartment l'identifiant du département que l'on veut vérifier
+	 * @return return l'indice du departement s'il existe, sinon on retourne -1
+	 */
+	public int existDepartment(int idDepartment) {
+	
+		for (int i = 0; i < listDepartments.size(); i++) {
+			if (listDepartments.get(i).getDepartmentNumber() == idDepartment) {
 				return i;
 			}
 		}

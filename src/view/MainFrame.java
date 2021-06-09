@@ -14,6 +14,7 @@ import projetPointeuseSSM.Employee;
 public class MainFrame extends JFrame{
 	
 	private ManagementPanel gestionManagementPanel;
+	private ManagementDepartmentPanel gestionDepartmentPanel;
 	private ReportingPanel historyPanel;
 	private JTabbedPane menuTab;
 	private Company company;
@@ -31,11 +32,12 @@ public class MainFrame extends JFrame{
 		this.setResizable(true); //we allow the Resizable of the frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Set the default closing of frame when we click on the red cross
 		menuTab = new JTabbedPane();
-		gestionManagementPanel = new ManagementPanel(this.company);
-		historyPanel = new ReportingPanel(this.company);
+		gestionManagementPanel = new ManagementPanel(company);
+		gestionDepartmentPanel = new ManagementDepartmentPanel(company);
+		historyPanel = new ReportingPanel(company);
 		menuTab.add(gestionManagementPanel);
 		menuTab.add(historyPanel);		
-		
+		menuTab.add(gestionDepartmentPanel);
 		this.setContentPane(menuTab);
 	}
 
@@ -51,10 +53,14 @@ public class MainFrame extends JFrame{
 		return company;
 	}
 	
-	public void updateEmployeeTable(ArrayList<Employee> listEmployee) {
-		gestionManagementPanel.updateEmployeeTableModel(listEmployee); 
+	public void updateEmployeeTable() {
+		gestionManagementPanel.updateEmployeeTableModel(company.getListEmployees()); 
 		//On mets a jour la table des historiques pour prendre en compte le cas o� on supprime un employ�
 		historyPanel.updateReportingTable();;
+	}
+	
+	public void updateDepartmentTable() {
+		gestionDepartmentPanel.updateDepartmentTable();
 	}
 	
 	public void updateReportingTable() {

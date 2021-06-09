@@ -129,7 +129,7 @@ public class modifyEmployeeController implements ActionListener {
 			employee.setIdEmployee(Integer.parseInt(idField.getText()));
 			employee.setIdDepartment(department.getDepartmentNumber());
 			employee.setPlanning(planning);
-			Main.mainFrame.updateEmployeeTable(company.getListEmployees());
+			Main.mainFrame.updateEmployeeTable();
 			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 		} catch(Exception ex) {
 			JOptionPane.showMessageDialog(view,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);

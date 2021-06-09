@@ -57,7 +57,7 @@ public class TicketReceiver extends Thread
 							System.out.println(receivedTicket);
 							ticketStorage.add(receivedTicket);
 							addPointingEmployee(receivedTicket);
-							Main.mainFrame.updateEmployeeTable(Main.company.getListEmployees());
+							Main.mainFrame.updateEmployeeTable();
 							
 						}
 				} 

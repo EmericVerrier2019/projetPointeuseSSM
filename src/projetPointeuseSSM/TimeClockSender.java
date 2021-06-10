@@ -1,9 +1,6 @@
 package projetPointeuseSSM;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -22,6 +19,21 @@ public class TimeClockSender {
 	{
 		try {
 			outputObjectStream.writeObject(t);
+			Serialization.writeTicket(clientSocket.getOutputStream(), t);
+			InputStream is = new FileInputStream(Serialization.getFILE_TICKETS());
+		    InputStreamReader isr = new InputStreamReader(is);
+		    BufferedReader buffer = new BufferedReader(isr);
+		        
+		    String line = buffer.readLine();
+		    StringBuilder builder = new StringBuilder();
+		        
+		    while(line != null){
+		       builder.append(line).append("\n");
+		       line = buffer.readLine();
+		    }    
+		    String str = builder.toString();
+		    System.out.println(str);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import com.sun.jdi.event.MonitorWaitedEvent;
@@ -36,10 +37,11 @@ public class Main {
 					//On crée une nouvelle instance de notre JDialog
 
 					mainStub();
+					mainFrame = new MainFrame(company);
 					MainFrameController controller = new MainFrameController(company);
 					controller.setMainFrame(new MainFrame(company));
 					controller.getMainFrame().setVisible(true);
-					mainFrame = controller.getMainFrame();
+					
 					
 				}
 			});
@@ -49,6 +51,9 @@ public class Main {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		catch (Exception ex){
+			JOptionPane.showMessageDialog(mainFrame,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		SwingUtilities.invokeLater(new Runnable() 

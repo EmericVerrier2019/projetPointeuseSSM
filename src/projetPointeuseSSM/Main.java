@@ -82,7 +82,7 @@ public class Main {
 		pla.PlanningStub();
 		test.setPlanning(pla);
 		Reporting report = new Reporting(test);
-		LocalDateTime date1 = LocalDateTime.of(LocalDate.now(),LocalTime.of(8, 0));
+		LocalDateTime date1 = LocalDateTime.of(LocalDate.of(2021, 6, 7),LocalTime.of(8, 0));
 		LocalDateTime date2 = date1.plusHours(9);
 		LocalDateTime date3 = date1.plusDays(1);
 		LocalDateTime date4 = date3.plusHours(5);

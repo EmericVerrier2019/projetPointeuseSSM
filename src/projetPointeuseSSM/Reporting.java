@@ -82,10 +82,10 @@ public class Reporting implements Serializable {
 		}
 		//sinon on vient de finir la journée
 		else {
-		currentDay.setTimeEnd(dateFromClocking);
-		Duration overTimeCurrentDayHour = getOverTimeCurrentDayHour(currentDay); //heure supplémentaire réalisé dans le currentDay
-		workedDays.put(currentDay, overTimeCurrentDayHour);
-		overTimeHour = overTimeHour.plus(overTimeCurrentDayHour);
+			currentDay.setTimeEnd(dateFromClocking);
+			Duration overTimeCurrentDayHour = getOverTimeCurrentDayHour(currentDay); //heure supplémentaire réalisé dans le currentDay
+			workedDays.put(currentDay, overTimeCurrentDayHour);
+			overTimeHour = overTimeHour.plus(overTimeCurrentDayHour);
 		}
 			
 	}

@@ -21,6 +21,7 @@ public class MainClocking {
 					}		
 					catch (Exception ex){
 						JOptionPane.showMessageDialog(fenetrePointeuse,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);
+						ex.printStackTrace();
 					}
 				}
 			});

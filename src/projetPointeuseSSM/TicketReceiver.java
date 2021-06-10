@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * initialized later by the mainframeController
  *
  */
-public class TicketReceiver extends Thread
+public class TicketReceiver extends Thread implements Runnable
 {
 	private Socket sendingSocket;
 	private ServerSocket receivingSocket;
@@ -59,6 +59,7 @@ public class TicketReceiver extends Thread
 							System.out.println(receivedTicket);
 							ticketStorage.add(receivedTicket);
 							addPointingEmployee(receivedTicket);
+							System.out.println("Recu appli");
 							Main.mainFrame.updateEmployeeTable();
 							
 						}

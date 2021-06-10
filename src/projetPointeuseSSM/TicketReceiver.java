@@ -8,6 +8,8 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 /**
  * 
  * This class is used by the application's controller to receive the tickets sent by the timeclock
@@ -78,7 +80,8 @@ public class TicketReceiver extends Thread
 			Employee employee = Main.company.getListEmployees().get(indiceEmployee);
 			employee.getReportingOfDayWorked().updateReporting(receiveTicket.getTicketDateTime());
 		}else {
-			System.out.println("employé n'est pas défini");
+			String message = "L'identifiant saisie ne correspond à aucun employé";
+			JOptionPane.showMessageDialog(Main.mainFrame,message,"Message",JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }

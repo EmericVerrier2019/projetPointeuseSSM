@@ -108,6 +108,7 @@ public class Reporting implements Serializable {
 		//si on sort de la boucle le nom du currentDay n'est pas bien définie
 		throw new IllegalAccessError("le nom du currentDay ne correspond pas avec ceux du planning");
 	}
+	
 
 	@Override
 	public String toString() {

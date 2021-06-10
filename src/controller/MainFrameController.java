@@ -53,7 +53,7 @@ public class MainFrameController{
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				TicketReceiver receiver = new TicketReceiver(new InetSocketAddress(3125));
+				TicketReceiver receiver = new TicketReceiver(new InetSocketAddress(3125), mainFrame);
 				receiver.setTicketStorage(ticketList);
 				receiver.start();
 			}

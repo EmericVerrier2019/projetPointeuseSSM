@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import view.MainFrame;
 /**
  * 
  * This class is used by the application's controller to receive the tickets sent by the timeclock
@@ -22,11 +24,12 @@ import javax.swing.JOptionPane;
  */
 public class TicketReceiver extends Thread implements Runnable
 {
+	private MainFrame mainFrame; // view rattaché à l'application
 	private Socket sendingSocket;
 	private ServerSocket receivingSocket;
 	private ObjectInputStream objectInputStream;
 	private ArrayList<Ticket> ticketStorage;
-	public TicketReceiver(InetSocketAddress address) 
+	public TicketReceiver(InetSocketAddress address, MainFrame mainFrame) 
 	{
 		super();
 		try {
@@ -37,6 +40,7 @@ public class TicketReceiver extends Thread implements Runnable
 				
 			}
 			ticketStorage = new ArrayList<Ticket>();
+			this.mainFrame = mainFrame;
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -60,7 +64,7 @@ public class TicketReceiver extends Thread implements Runnable
 							ticketStorage.add(receivedTicket);
 							addPointingEmployee(receivedTicket);
 							System.out.println("Recu appli");
-							Main.mainFrame.updateEmployeeTable();
+							mainFrame.updateEmployeeTable();
 							
 						}
 				} 

@@ -26,6 +26,21 @@ public class TimeClockSender {
 			e.printStackTrace();
 		}
 	}
+	public void setClientSocket(Socket socketToSet) 
+	{
+		if(clientSocket.isConnected() && clientSocket.isClosed() == false) 
+		{
+			try 
+			{
+				clientSocket.close();
+			}
+			catch(Exception e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		clientSocket = socketToSet;
+	}
 	public Socket getClientSocket() 
 	{
 		return clientSocket;

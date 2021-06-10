@@ -1,5 +1,6 @@
 package view.timeClockView;
 import java.awt.GridLayout;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -17,12 +18,12 @@ import projetPointeuseSSM.TimeClockController;
 
 public class TimeClockFrame extends JFrame{
 
-	public TimeClockFrame() 
+	public TimeClockFrame() throws IOException
 	{
 		super();
 		build();
 	}
-	private void build() 
+	private void build() throws IOException
 	{
 		// define the organization of JFrame : one JTabbedPane which embed two JPanel
 		JTabbedPane timeClockPane = new JTabbedPane();

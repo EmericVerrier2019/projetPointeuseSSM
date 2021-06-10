@@ -1,5 +1,6 @@
 package view.timeClockView;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -35,7 +36,7 @@ public final class JPanelTimeClockView extends JPanel {
 		
 	}
 
-	public JPanelTimeClockView()
+	public JPanelTimeClockView() throws IOException
 	{
 		this.connectButton = new JButton("connecter");
 		this.dateElem= new String();

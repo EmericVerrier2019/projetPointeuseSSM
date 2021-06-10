@@ -28,7 +28,7 @@ public class TimeClockController {
 	private InetSocketAddress ipParameters;
 	private TimeClockFrame frameTimeClock;
 
-	public TimeClockController()
+	public TimeClockController()throws IOException
 	{	
 		//frameTimeClock = new TimeClockFrame();
 		ipParameters = new InetSocketAddress(3125);
@@ -46,7 +46,7 @@ public class TimeClockController {
 	{
 		return frameTimeClock;
 	}
-	public void setSender(InetAddress address, int port) 
+	public void setSender(InetAddress address, int port) throws IOException 
 	{
 		ipParameters = new InetSocketAddress(address,port);
 		sender = new TimeClockSender(ipParameters);

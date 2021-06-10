@@ -1,5 +1,7 @@
 package view.timeClockView;
 
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,7 +20,7 @@ public final class JPanelParametersView extends JPanel
 	private JButton parametersButton;
 	
 
-	public JPanelParametersView() 
+	public JPanelParametersView() throws IOException
 	{
 		ipLabel = new JLabel("IP Adress : ");
 		portLabel = new JLabel("Port : ");

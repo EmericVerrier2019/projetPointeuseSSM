@@ -12,15 +12,11 @@ public class TimeClockSender {
 	private ObjectOutputStream outputObjectStream;
 
 	
-	public TimeClockSender(InetSocketAddress socketServerAddress) 
+	public TimeClockSender(InetSocketAddress socketServerAddress) throws IOException
 	{
-		try {
 			clientSocket = new Socket(socketServerAddress.getAddress(),socketServerAddress.getPort());
 			outputObjectStream = new ObjectOutputStream(clientSocket.getOutputStream());
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	public void sentTicket(Ticket t) 
 	{

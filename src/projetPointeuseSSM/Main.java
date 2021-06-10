@@ -56,14 +56,7 @@ public class Main {
 			JOptionPane.showMessageDialog(mainFrame,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);
 		}
 		
-		SwingUtilities.invokeLater(new Runnable() 
-		{
-			public void run() 
-			{
-				TimeClockFrame fenetrePointeuse = new TimeClockFrame();
-				fenetrePointeuse.setVisible(true);
-			}
-		});
+		
 	}
 
 	/**

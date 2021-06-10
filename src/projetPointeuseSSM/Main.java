@@ -40,7 +40,7 @@ public class Main {
 					mainFrame = new MainFrame(company);
 					MainFrameController controller = new MainFrameController(company);
 					controller.setMainFrame(new MainFrame(company));
-					controller.getMainFrame().setVisible(true);
+					mainFrame.setVisible(true);
 					
 					
 				}

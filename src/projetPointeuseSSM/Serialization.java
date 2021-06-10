@@ -17,23 +17,12 @@ public class Serialization {
 	/**
 	 * file containing the clocking queue
 	 */
-	private static File FILE_CLOCKING_QUEUE = new File("clocking_queue.ser");
+	private static File FILE_TICKETS = new File("tickets.ser");
 
 	/**
 	 * a file with informations of the company
 	 */
 	private static File FILE_COMPANY = new File("company.ser");
-	
-	/**
-	 * a file with informations of management settings 
-	 */
-	private static File FILE_MANAGER_SETTINGS = new File("manager_settings.ser");
-	
-	/**
-	 * a file with informations of emulator settings 
-	 */
-	private static File FILE_EMULATOR_SETTINGS = new File("emulator_settings.ser");
-	
 	
 	
 	public static File getFILE_COMPANY() {
@@ -45,38 +34,17 @@ public class Serialization {
 		FILE_COMPANY = fILE_COMPANY;
 	}
 
-
-	public static File getFILE_MANAGER_SETTINGS() {
-		return FILE_MANAGER_SETTINGS;
+	public static File getFILE_TICKETS() {
+		return FILE_TICKETS;
 	}
 
 
-	public static void setFILE_MANAGER_SETTINGS(File fILE_MANAGER_SETTINGS) {
-		FILE_MANAGER_SETTINGS = fILE_MANAGER_SETTINGS;
-	}
-
-
-	public static File getFILE_EMULATOR_SETTINGS() {
-		return FILE_EMULATOR_SETTINGS;
-	}
-
-
-	public static void setFILE_EMULATOR_SETTINGS(File fILE_EMULATOR_SETTINGS) {
-		FILE_EMULATOR_SETTINGS = fILE_EMULATOR_SETTINGS;
-	}
-
-
-	public static File getFILE_CLOCKING_QUEUE() {
-		return FILE_CLOCKING_QUEUE;
-	}
-
-
-	public static void setFILE_CLOCKING_QUEUE(File fILE_CLOCKING_QUEUE) {
-		FILE_CLOCKING_QUEUE = fILE_CLOCKING_QUEUE;
+	public static void setFILE_TICKETS(File fILE_TICKETS) {
+		FILE_TICKETS = fILE_TICKETS;
 	}
 
 	/**
-	 * Redefinition de la fonction de lecture d'un fichier
+	 * Redefinition de fonction de lecture d'un fichier
 	 * @param file - a file to read
 	 * @param argObject - l'objet utilise pour la lecture en cas d'objet vide
 	 * @return the object read
@@ -139,23 +107,21 @@ public class Serialization {
 		}
 		return timeClock;
 	}
-	
 	/**
 	 * Ecrit dans un flux une donnee de la pointeuse
 	 * @param output
 	 * @param clocking
 	 * @throws IOException
 	 */
-	public static void writeClocking(OutputStream output, TimeClockController timeClock) throws IOException {
-		ObjectOutputStream objOutput = new ObjectOutputStream(output);
-		//ecrit dans le fichier une donnee de la pointeuse
-		objOutput.writeObject(timeClock);
+	public static void writeTicket(OutputStream output, Ticket ticket) throws IOException {
+		//On sauvegrde le 
+		writeObject(FILE_TICKETS,ticket);
 		//vide le buffer rentre en argument 
 		output.flush();
 		
 	}
 	/**
-	 * Methode permettant de caster le fichier de l'entreprise en classe entreprise
+	 * Methode permettant de caster le fichier de l'entrerise en classe entreprise
 	 * @return l'entrepise 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -173,5 +139,6 @@ public class Serialization {
 	public static void writeCompany(Company company) throws IOException {
 		writeObject(FILE_COMPANY, company);
 	}
+	
 	
 }

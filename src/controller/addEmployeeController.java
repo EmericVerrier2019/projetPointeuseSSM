@@ -1,10 +1,11 @@
 package controller;
 
-
+import projetPointeuseSSM.Serialization;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -22,7 +23,12 @@ import view.DetailsEmployeeView;
 
 
 
-public class addEmployeeController implements ActionListener {
+public class addEmployeeController implements ActionListener, Serializable {
+
+	/**
+	 * For serialization
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/*
 	 * view qui est rattaché au controleur
@@ -109,7 +115,6 @@ public class addEmployeeController implements ActionListener {
 			}
 			
 			
-			
 			//creation du planning
 			
 			Planning planning = new Planning();
@@ -130,6 +135,9 @@ public class addEmployeeController implements ActionListener {
 			Employee employee = new Employee(firstFieldName.getText(),lastFieldName.getText(),department.getDepartmentNumber(),Integer.parseInt(idField.getText()));
 			employee.setPlanning(planning);
 			company.addEmployee(employee, department);
+			if(Serialization.getFILE_COMPANY().delete()) {
+				Serialization.writeCompany(company);
+			}
 			Main.mainFrame.updateEmployeeTable();
 			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 		} catch(Exception ex) {

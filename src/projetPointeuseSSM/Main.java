@@ -1,5 +1,6 @@
 package projetPointeuseSSM;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.time.*;
 
@@ -34,9 +35,19 @@ public class Main {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable(){
 				public void run(){
-					//On crée une nouvelle instance de notre JDialog
-
-					mainStub();
+					if (Serialization.getFILE_COMPANY().length() > 0) {
+						try {
+							company = Serialization.readCompany();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}else {
+						mainStub();
+					}
 					mainFrame = new MainFrame(company);
 					MainFrameController controller = new MainFrameController(company);
 					controller.setMainFrame(new MainFrame(company));
@@ -72,8 +83,8 @@ public class Main {
 		Main.company.addDepartment(dep);
 		Main.company.addDepartment(dep1);
 		Employee test = new Employee();
-		test.setFirstNameEmployee("Prenom"); 
-		test.setLastNameEmployee("nom");
+		test.setFirstNameEmployee("Pierre"); 
+		test.setLastNameEmployee("Laroche");
 		test.setIdDepartment(1);
 		test.setIdEmployee(1);
 		Planning pla = new Planning();

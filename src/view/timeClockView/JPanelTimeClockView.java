@@ -21,6 +21,7 @@ public final class JPanelTimeClockView extends JPanel {
 	private JLabel textDate;
 	private String dateElem;
 	private Timer timerUpdateDisplayedHeure;
+	private JButton connectButton;
 	
 	private class timerTaskUpdateHour extends TimerTask
 	{
@@ -36,6 +37,7 @@ public final class JPanelTimeClockView extends JPanel {
 
 	public JPanelTimeClockView()
 	{
+		this.connectButton = new JButton("connecter");
 		this.dateElem= new String();
 		timerUpdateDisplayedHeure = new Timer();
 		userIdField = new JTextField(20);
@@ -50,10 +52,12 @@ public final class JPanelTimeClockView extends JPanel {
 		userIdLabel.setDisplayedMnemonic('i');
 		checkInButton.addActionListener(new TimeClockController().getTimeClockButtonManager());
 		timerUpdateDisplayedHeure.schedule(new timerTaskUpdateHour(),0,1000);
+		connectButton.addActionListener(new TimeClockController().connectButtonManager);
 		this.add(textDate);
 		this.add(userIdLabel);
 		this.add(userIdField);
 		this.add(checkInButton);
+		this.add(connectButton);
 
 	}
 	public String getUserIdFieldContent() 

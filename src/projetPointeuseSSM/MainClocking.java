@@ -1,7 +1,6 @@
 package projetPointeuseSSM;
 
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import view.timeClockView.TimeClockFrame;
@@ -18,19 +17,13 @@ public class MainClocking {
 					try 
 					{
 						TimeClockFrame fenetrePointeuse = new TimeClockFrame();
-						fenetrePointeuse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						fenetrePointeuse.setVisible(true);
 					}		
 					catch (Exception ex){
-						JOptionPane t = new JOptionPane();
-						t.showMessageDialog(fenetrePointeuse,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);
-						t.getRootFrame().dispose();
-						
-						
+						JOptionPane.showMessageDialog(fenetrePointeuse,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 			});
-			
 
 
 	}

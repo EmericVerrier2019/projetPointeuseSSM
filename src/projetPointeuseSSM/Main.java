@@ -39,10 +39,8 @@ public class Main {
 						try {
 							company = Serialization.readCompany();
 						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}else {
@@ -57,10 +55,8 @@ public class Main {
 				}
 			});
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (Exception ex){
@@ -71,10 +67,10 @@ public class Main {
 	}
 
 	/**
-	 * @brief fonction qui instancie une entreprise à partir de rien
+	 * @brief fonction qui instancie une entreprise ï¿½ partir de rien
 	 */
 	public static void mainStub() {
-		//On crée une nouvelle instance de notre JDialog
+		//On crï¿½e une nouvelle instance de notre JDialog
 		Main.company = new Company("Company");
 		Department dep =  new Department();
 		Department dep1 =  new Department();

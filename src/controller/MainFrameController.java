@@ -24,11 +24,13 @@ public class MainFrameController{
 	private Company company ;
 	private ArrayList<Ticket> ticketList;
 	private MainFrame mainFrame;
+	private TicketReceiver ticketReceiver;
 	public MainFrameController(Company company)
 	{
 		this.company = company;
 		ticketList = new ArrayList<Ticket>();
 		setMainFrame(new MainFrame(company));
+		ticketReceiver = new TicketReceiver(new InetSocketAddress(3125),mainFrame);
 		
 		
 	}

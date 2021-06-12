@@ -29,6 +29,7 @@ public class TimeClockFrame extends JFrame{
 		JTabbedPane timeClockPane = new JTabbedPane();
 		JPanelTimeClockView timeClockTab = new JPanelTimeClockView();
 		JPanelParametersView parametersTab = new JPanelParametersView();
+		TimeClockController.setFrameTimeClock(this);
 		
 		
 		// define general informations for the jFrame as its title, its dimensions...
@@ -36,7 +37,7 @@ public class TimeClockFrame extends JFrame{
 		setSize(500,500);
 		setLocationRelativeTo(null);
 		setResizable(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		//adding the two Panes to the JTabbedPane and setting the content pane of the JFrame with the JTabbedPane
 		timeClockPane.addTab("timeClock", timeClockTab);

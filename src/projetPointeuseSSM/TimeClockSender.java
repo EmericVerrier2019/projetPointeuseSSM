@@ -1,18 +1,20 @@
 package projetPointeuseSSM;
 
 import java.io.*;
+import java.net.ConnectException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class TimeClockSender {
-    private Socket clientSocket;
-    private ObjectOutputStream outputObjectStream;
+    private static Socket clientSocket;
+    private static ObjectOutputStream outputObjectStream;
 
 
     public TimeClockSender(InetSocketAddress socketServerAddress) throws IOException
     {
-            clientSocket = new Socket(socketServerAddress.getAddress(),socketServerAddress.getPort());
-            outputObjectStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            clientSocket = null;
+            outputObjectStream = null;
 
     }
     public void sentTicket(Ticket t) 
@@ -37,6 +39,36 @@ public class TimeClockSender {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void setClientSocket(Socket socket) throws IOException
+    {
+    	clientSocket = socket;
+    	outputObjectStream = new ObjectOutputStream(socket.getOutputStream());
+    }
+    public void setClientSocket(InetAddress addr, int port) throws IOException
+    {
+    	if(addr != null) 
+    	{
+    		try 
+    		{
+    			clientSocket = new Socket(addr, port);
+    			outputObjectStream = new ObjectOutputStream(clientSocket.getOutputStream());
+    		}
+    		catch(IOException exce) 
+    		{
+    			exce.printStackTrace();
+    		}
+    	}
+    }
+    public void setClientSocket(InetSocketAddress addrSock) throws IOException
+    {
+    	if(addrSock != null) 
+    	{
+
+    		clientSocket = new Socket(addrSock.getAddress(),addrSock.getPort());
+    		outputObjectStream = new ObjectOutputStream(clientSocket.getOutputStream());
+
+    	}
     }
     public Socket getClientSocket() 
     {

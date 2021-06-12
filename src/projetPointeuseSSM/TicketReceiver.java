@@ -24,7 +24,7 @@ import view.MainFrame;
  */
 public class TicketReceiver extends Thread implements Runnable
 {
-	private MainFrame mainFrame; // view rattaché à l'application
+	private MainFrame mainFrame; // view rattachï¿½ ï¿½ l'application
 	private Socket sendingSocket;
 	private ServerSocket receivingSocket;
 	private ObjectInputStream objectInputStream;
@@ -45,6 +45,7 @@ public class TicketReceiver extends Thread implements Runnable
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		start();
 	}
 	public void setTicketStorage(ArrayList<Ticket> storage) 
 	{
@@ -63,7 +64,7 @@ public class TicketReceiver extends Thread implements Runnable
 							System.out.println(receivedTicket);
 							ticketStorage.add(receivedTicket);
 							addPointingEmployee(receivedTicket);
-							System.out.println("Recu appli");
+							System.out.println("ReÃ§u appli");
 							mainFrame.updateEmployeeTable();
 							
 						}
@@ -85,7 +86,7 @@ public class TicketReceiver extends Thread implements Runnable
 			Employee employee = Main.company.getListEmployees().get(indiceEmployee);
 			employee.getReportingOfDayWorked().updateReporting(receiveTicket.getTicketDateTime());
 		}else {
-			String message = "L'identifiant saisie ne correspond à aucun employé";
+			String message = "L'identifiant saisie ne correspond ï¿½ aucun employï¿½";
 			JOptionPane.showMessageDialog(Main.mainFrame,message,"Message",JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

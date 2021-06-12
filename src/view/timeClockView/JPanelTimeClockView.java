@@ -51,7 +51,7 @@ public final class JPanelTimeClockView extends JPanel {
 		userIdField.setEditable(true);
 		userIdLabel.setLabelFor(userIdField);
 		userIdLabel.setDisplayedMnemonic('i');
-		checkInButton.addActionListener(new TimeClockController().getTimeClockButtonManager());
+		checkInButton.addActionListener(new TimeClockController().timeClockButtonManager);
 		timerUpdateDisplayedHeure.schedule(new timerTaskUpdateHour(),0,1000);
 		connectButton.addActionListener(new TimeClockController().connectButtonManager);
 		this.add(textDate);

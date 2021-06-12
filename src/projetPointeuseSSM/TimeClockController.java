@@ -168,6 +168,7 @@ public class TimeClockController {
 				{
 					if(sender.getClientSocket().isConnected()) 
 					{
+						//ticketToSend = new Ticket(LocalDateTime.now().minusDays(2), 2);
 						sender.sentTicket(ticketToSend);
 					}
 				}

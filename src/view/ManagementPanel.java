@@ -22,13 +22,14 @@ import projetPointeuseSSM.TableModel.ManagementTableModel;
 public class ManagementPanel extends JPanel{
 	
 	/**
-	 * Numero de version imposé par JPanel
+	 * Numero de version imposï¿½ par JPanel
 	 */
 	private static final long serialVersionUID = 1L;
 
 	private ManagementTableModel tableModel;
 	
 	private Company company;
+	private JTable tb;
 	
 	public ManagementPanel(Company company) {
 		super();
@@ -41,20 +42,20 @@ public class ManagementPanel extends JPanel{
 		
 	private void IHMSetUp() {
 			
-		JTable tb = new JTable(tableModel);
+		tb = new JTable(tableModel);
 		tb.getTableHeader().setReorderingAllowed(false);
 		tb.setModel(tableModel);
-		tb.getColumnModel().getColumn(3).setCellRenderer(new IsWorkingEmployeeCellRenderer()); //on définie un rendu pour la dernière colonne
+		tb.getColumnModel().getColumn(3).setCellRenderer(new IsWorkingEmployeeCellRenderer()); //on dï¿½finie un rendu pour la derniï¿½re colonne
 		tb.addMouseListener(new DetailsEmployeeController(company));
 		
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(tb),BorderLayout.CENTER);
 		JButton addEmployeeButton = new JButton("ajouter");
 		addEmployeeButton.addActionListener(
-			//création du formulaire d'inscription
+			//crï¿½ation du formulaire d'inscription
 			new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					//Pour ajouter un employé on utilise la vue des details avec null pour le paramètre de l'employé
+					//Pour ajouter un employï¿½ on utilise la vue des details avec null pour le paramï¿½tre de l'employï¿½
 					DetailsEmployeeView addEmployeeView = new DetailsEmployeeView(null, company);
 					addEmployeeView.setVisible(true);	
 				}
@@ -66,8 +67,12 @@ public class ManagementPanel extends JPanel{
 	
 	
 	public void updateEmployeeTableModel(ArrayList<Employee> listEmployee) {
+		
 		tableModel.setEmployees(listEmployee);
 		tableModel.fireTableDataChanged();
+		tableModel.fireTableCellUpdated(1,1);
+		validate();
+		repaint();
 	}
 	
 }

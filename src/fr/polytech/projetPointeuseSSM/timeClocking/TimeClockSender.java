@@ -7,8 +7,15 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import fr.polytech.projetPointeuseSSM.application.Serialization;
-
+/**
+ * 
+ * a class used to send Tickets to the remote application.
+ * clientSocket is Socket object which is used to send ticket to the remote application, the socket isn't directly set to the TimeClock launching
+ * outputObjectStream is an ObjectOutputStream which is used to write Ticket in the socket output channel, storage. Both of these attributes are static attributes
+ *
+ */
 public class TimeClockSender {
+
     private static Socket clientSocket;
     private static ObjectOutputStream outputObjectStream;
 
@@ -19,6 +26,10 @@ public class TimeClockSender {
             outputObjectStream = null;
 
     }
+    /**
+     * @param t the ticket sent to the remote application, this ticket is serialized before the sending to keep an eye on it if the timeclock or the remote application 
+     * is closed unexpectedly.
+     */
     public void sentTicket(Ticket t) 
     {
         try {
@@ -42,11 +53,20 @@ public class TimeClockSender {
             e.printStackTrace();
         }
     }
+    /**
+     * @param socket which will be used to initialize clientSocket, At the end of this method, the socket is usable
+     * @throws IOException in case where the remote address or/port of the socket param is not accessible.
+     */
     public void setClientSocket(Socket socket) throws IOException
     {
     	clientSocket = socket;
     	outputObjectStream = new ObjectOutputStream(socket.getOutputStream());
     }
+    /**
+     * @param addr ip address of the remote machine which will receive the Ticket objects later
+     * @param port tcp port of the remote machine which will receive the Ticket objects later
+     * @throws IOException in case where the remote port or address is not accessible, the exception are managed in a windows for the user understand the cause of the problem
+     */
     public void setClientSocket(InetAddress addr, int port) throws IOException
     {
     	if(addr != null) 
@@ -62,6 +82,10 @@ public class TimeClockSender {
     		}
     	}
     }
+    /**
+     * @param addrSock a socket Adress object which could be saved later in the parameters serialized and stored in a file
+     * @throws IOException in case where the specified InetSocketAddress is not usable to send data, one more time, the exception throwed aren't directly managed here
+     */
     public void setClientSocket(InetSocketAddress addrSock) throws IOException
     {
     	if(addrSock != null) 
@@ -72,6 +96,9 @@ public class TimeClockSender {
 
     	}
     }
+    /**
+     * @return the client socket which can be a null object in some cases, so the value returned should be tested. 
+     */
     public Socket getClientSocket() 
     {
         return clientSocket;

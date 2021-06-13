@@ -23,6 +23,18 @@ import fr.polytech.projetPointeuseSSM.timeClocking.view.JPanelParametersView;
 import fr.polytech.projetPointeuseSSM.timeClocking.view.JPanelTimeClockView;
 import fr.polytech.projetPointeuseSSM.timeClocking.view.TimeClockFrame;
 
+/**
+ * 
+ * The TimeClockController is a class used to establish  the link between the model classes and the view classes.
+ * The controller calls some models class when the user interact by some actions with the view objects
+ * sender is a TimeClockSender object used to send tickets to the remote application
+ * ipParameters is a InetSocketAddress containing the address saved in the parameters file or entered by the user
+ * parametersButtonManager the Action listener binded with the save parameters button, when the button is clicked the parametersButtonManager attributes is called to save parameters in the ipParameters attribute
+ * timeClockButtonManager the Action listener binded with the check in/out button, which is invoked when the user clicks on the check/in out button
+ * connectButtonManager the Action listener binded with the connect button, which is invoked when the user clicks the connect button
+ * frameTimeClock is a TimeClockFrame object, the view object linked to the controller. With the view in attributes, the controller can access to the view elements
+ *
+ */
 public class TimeClockController {
 	private static TimeClockSender sender;
 	private static InetSocketAddress ipParameters;
@@ -40,6 +52,11 @@ public class TimeClockController {
 		timeClockButtonManager = new ActionListenerTimeClockCheckInButton();
 		connectButtonManager = new ActionListenerConnectButton();
 	}
+	/**
+	 * 
+	 * @param tf - the view attached to the controller, a TimeClockFrame object. Two windows listener are also defined to manage the
+	 * opening and the closing of the window, to serialize (when the timeClock is exited) and deserialize (when the timeClock is launched) ipParameters.
+	 */
 	public static void setFrameTimeClock(TimeClockFrame tf) 
 	{
 		frameTimeClock = tf;

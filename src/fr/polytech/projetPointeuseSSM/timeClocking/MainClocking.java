@@ -8,7 +8,7 @@ import fr.polytech.projetPointeuseSSM.timeClocking.view.TimeClockFrame;
 /**
  * 
  * main class of the timeclock part of our project,
- * it's role is to launch the view.
+ * it's role is to launch the view. Both of the parts are executed on different threads
  *
  */
 public class MainClocking {

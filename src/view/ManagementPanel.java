@@ -15,6 +15,7 @@ import controller.DetailsEmployeeController;
 import controller.addEmployeeController;
 import projetPointeuseSSM.Company;
 import projetPointeuseSSM.Employee;
+import projetPointeuseSSM.Main;
 import projetPointeuseSSM.TableModel.IsWorkingEmployeeCellRenderer;
 import projetPointeuseSSM.TableModel.ManagementTableModel;
 
@@ -30,11 +31,14 @@ public class ManagementPanel extends JPanel{
 	
 	private Company company;
 	
-	public ManagementPanel(Company company) {
+	private MainFrame mainFrame;
+	
+	public ManagementPanel(Company company, MainFrame mainFrame) {
 		super();
 		setName("Accueil");
 		this.company = company;
 		this.tableModel = new ManagementTableModel(company);
+		this.mainFrame = mainFrame;
 		IHMSetUp();
 	}
 	
@@ -45,7 +49,7 @@ public class ManagementPanel extends JPanel{
 		tb.getTableHeader().setReorderingAllowed(false);
 		tb.setModel(tableModel);
 		tb.getColumnModel().getColumn(3).setCellRenderer(new IsWorkingEmployeeCellRenderer()); //on définie un rendu pour la dernière colonne
-		tb.addMouseListener(new DetailsEmployeeController(company));
+		tb.addMouseListener(new DetailsEmployeeController(company,mainFrame));
 		
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(tb),BorderLayout.CENTER);
@@ -55,7 +59,7 @@ public class ManagementPanel extends JPanel{
 			new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//Pour ajouter un employé on utilise la vue des details avec null pour le paramètre de l'employé
-					DetailsEmployeeView addEmployeeView = new DetailsEmployeeView(null, company);
+					DetailsEmployeeView addEmployeeView = new DetailsEmployeeView(null, company,mainFrame);
 					addEmployeeView.setVisible(true);	
 				}
 			}

@@ -32,7 +32,7 @@ public class MainFrame extends JFrame{
 		this.setResizable(true); //we allow the Resizable of the frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Set the default closing of frame when we click on the red cross
 		menuTab = new JTabbedPane();
-		gestionManagementPanel = new ManagementPanel(company);
+		gestionManagementPanel = new ManagementPanel(company,this);
 		gestionDepartmentPanel = new ManagementDepartmentPanel(company);
 		historyPanel = new ReportingPanel(company);
 		menuTab.add(gestionManagementPanel);

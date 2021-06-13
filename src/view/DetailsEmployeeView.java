@@ -58,16 +58,20 @@ public class DetailsEmployeeView extends JDialog {
 	 */
 	private ArrayList<Component> listComponentView = new ArrayList<Component>();
 	
+	/*
+	 * frame principale de l'application
+	 */
+	private MainFrame mainFrame;
 	/**
 	 * Crée la vue
 	 * @param employee Employé géré par le fenêtre (nul si l'on souhaite ajouter un employé)
 	 * @param company Entreprise gérée par l'application
 	 */
-	public DetailsEmployeeView(Employee employee, Company company) {
+	public DetailsEmployeeView(Employee employee, Company company, MainFrame mainFrame) {
 		
 		this.employee = employee;
 		this.company = company;
-		
+		this.mainFrame = mainFrame;
 		getContentPane().add(new JScrollPane(createContent()));
 		
 		if(employeeIsModifiying()) {
@@ -293,6 +297,11 @@ public class DetailsEmployeeView extends JDialog {
 		return fieldsContainer;
 	}
 	
+	
+	public MainFrame getMainFrame() {
+		return mainFrame;
+	}
+
 	/**
 	 * Permet de savoir si l'on modifie l'employee
 	 * @return vrai si on modifie l'employé, faux si on ajoute un employé

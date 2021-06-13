@@ -1,6 +1,7 @@
 package projetPointeuseSSM.TableModel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -9,11 +10,11 @@ import projetPointeuseSSM.Employee;
 
 public class ManagementTableModel extends AbstractTableModel{
 	/**
-	 * Numéro de version imposé par AbstractTableModel
+	 * Numï¿½ro de version imposï¿½ par AbstractTableModel
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Employee> employees;
-	private static final String[] header = {"id","prenom","nom","Présent sur site"} ;
+	private static final String[] header = {"id","prenom","nom","Prï¿½sent sur site"} ;
 	
 	public ManagementTableModel() {
 		super();
@@ -68,8 +69,15 @@ public class ManagementTableModel extends AbstractTableModel{
 			return null;
 		}
 	}
-	
-
+	@Override
+	public void fireTableDataChanged() {
+		super.fireTableDataChanged();
+		
+	}
+	@Override
+	public void fireTableCellUpdated(int row, int column) {
+		super.fireTableCellUpdated(row, column);
+	}
 	@Override
     public boolean isCellEditable(int row, int col) {
         return false;

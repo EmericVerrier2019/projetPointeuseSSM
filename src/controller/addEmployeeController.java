@@ -138,7 +138,7 @@ public class addEmployeeController implements ActionListener, Serializable {
 			if(Serialization.getFILE_COMPANY().delete()) {
 				Serialization.writeCompany(company);
 			}
-			Main.mainFrame.updateEmployeeTable();
+			view.getMainFrame().updateEmployeeTable();
 			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 		} catch(Exception ex) {
 			JOptionPane.showMessageDialog(view,ex.getMessage(),"Message",JOptionPane.INFORMATION_MESSAGE);

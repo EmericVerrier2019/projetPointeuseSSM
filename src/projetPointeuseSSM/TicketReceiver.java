@@ -64,9 +64,7 @@ public class TicketReceiver extends Thread implements Runnable
 							System.out.println(receivedTicket);
 							ticketStorage.add(receivedTicket);
 							addPointingEmployee(receivedTicket);
-							System.out.println("Reçu appli");
 							mainFrame.updateEmployeeTable();
-							
 						}
 				} 
 				catch (ClassNotFoundException e) 

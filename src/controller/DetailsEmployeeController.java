@@ -6,7 +6,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JTable;
 
 import projetPointeuseSSM.Company;
+import projetPointeuseSSM.Main;
 import view.DetailsEmployeeView;
+import view.MainFrame;
 
 
 /*
@@ -19,8 +21,11 @@ public class DetailsEmployeeController implements MouseListener {
 	 */
 	private Company company;
 	
-	public DetailsEmployeeController(Company company) {
+	private MainFrame mainFrame;
+	
+	public DetailsEmployeeController(Company company, MainFrame mainFrame) {
 		this.company = company;
+		this.mainFrame = mainFrame;
 	}
 
 	@Override
@@ -37,7 +42,7 @@ public class DetailsEmployeeController implements MouseListener {
 	        if (table.getSelectedRow() != -1) { // On vérifie si une ligne est bien sélectionnée
 	        	
 	        	// On ouvre la fenetre correspondant au détail de l'employé
-	        	DetailsEmployeeView detailsEmployeeView = new DetailsEmployeeView(company.getListEmployees().get(row), company);
+	        	DetailsEmployeeView detailsEmployeeView = new DetailsEmployeeView(company.getListEmployees().get(row), company, mainFrame);
 	        	detailsEmployeeView.setVisible(true);
 	        }
 		}

@@ -56,6 +56,7 @@ public class TimeClockController {
 	 * 
 	 * @param tf - the view attached to the controller, a TimeClockFrame object. Two windows listener are also defined to manage the
 	 * opening and the closing of the window, to serialize (when the timeClock is exited) and deserialize (when the timeClock is launched) ipParameters.
+	 * ip parameters are saved in a file, in the Data_TimeClock folder, parametersTimeClock.ser.
 	 */
 	public static void setFrameTimeClock(TimeClockFrame tf) 
 	{
@@ -138,32 +139,62 @@ public class TimeClockController {
 			}
 		});
 	}
+	/**
+	 * A mutator to get the associated view object binded to this instance of the controller
+	 * @return frameTimeClock
+	 */
 	public TimeClockFrame getFrameTimeClock() 
 	{
 		return frameTimeClock;
 	}
+	/**
+	 * @param address - the InetAddress of the sender socket, so this address represents also the remote application host machine
+	 * @param port - the TCP port of the sender socket, this port represent the remote port of the application host machine
+	 * @throws IOException - in case where the distant machine is not accessible
+	 */
 	public void setSender(InetAddress address, int port) throws IOException 
 	{
 		ipParameters = new InetSocketAddress(address,port);
 		sender = new TimeClockSender(ipParameters);
 	}
+	/**
+	 * @param socketAddressToSet - the InetSocket address used to initialize the sender socket, this socket address packs a TCP port and an Ip address
+	 * @throws IOException - in case where the distant machine isn't accessible
+	 */
 	public void setSender(InetSocketAddress socketAddressToSet)throws IOException
 	{
 		ipParameters = socketAddressToSet;
 		sender = new TimeClockSender(ipParameters);
 	}
+	/**
+	 * A mutator to get the sender object. The sender can contain an uninitialized Socket.
+	 * @return sender
+	 */
 	public TimeClockSender getSender() 
 	{
 		return sender;
 	}
+	/**
+	 * A mutator to get the InetSocketAddress object ipParameters which is readen from an external file or set by the user in parameters tab
+	 * @return ipParameters
+	 */
 	public InetSocketAddress getIpParameters() 
 	{
 		return ipParameters;
 	}
+	/**
+	 * a mutator to set the ipParameters to select the remote machine hosting the main application
+	 * @param address
+	 */
 	public static void setIpParameters(InetSocketAddress address) 
 	{
 		ipParameters = address;
 	}
+	/**
+	 * a mutator to set the ipParameters with a given InetAddress object and an integer value for the port
+	 * @param addr
+	 * @param port
+	 */
 	public  static void setIpParameters(InetAddress addr, int port) {
 
 		ipParameters = new InetSocketAddress(addr, port);
@@ -201,6 +232,10 @@ public class TimeClockController {
 			}	
 		}
 	}
+	/**
+	 * An internal class allowing us to manage events on the JButton connect embedded in the view. When this element is clicked, the sender socket 
+	 * of the current TimeClockController is constructed and initialized, results appear in JOptionPane to notify the user of the result of the connection
+	 */
 	public class ActionListenerConnectButton implements ActionListener
 	{
 		@Override
@@ -244,6 +279,12 @@ public class TimeClockController {
 		}
 
 	}
+	/**
+	 * 
+	 * intern class implementing ActionListener interface to control the behavior linked to the Parameters button, in the parameters panel, when you click on it, it
+	 * saves the TCP/IP parameters to select the remote machine hosting the application, in an InetSocketAddress attributes ipParameters.
+	 *
+	 */
 	public class ActionListenerParametersButton implements ActionListener{
 		public ActionListenerParametersButton()
 		{
